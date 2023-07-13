@@ -1,20 +1,19 @@
 const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get('id');
 
-const url = 'https://fakestoreapi.com/products/'+id;
+const url = 'https://dummyjson.com/products/' + id;
 console.log(window.location.href);
 async function getdata() {
     const response = await fetch(url);
     var product = await response.json();
-    
-    const pic = document.getElementById("pic");
-    const title = document.getElementById("title");
-    const price = document.getElementById("price");
-    const description = document.getElementById("description");
 
-    description.innerHTML = product.description;
-    price.innerHTML = product.price;
-    title.innerHTML = product.title;
-    pic.innerHTML = `<img src="${product.image}" />`
+    const tabContent = document.getElementById("tab-content");
+    tabContent.innerHTML = `<div class="tab-pane active" id="pic-1"><img width="400" height="252" src="${product.images[0]}" /></div>`;
+    for (let index = 0; index < product.images.length; index++) {
+        const img = product.images[index];
+        tabContent.innerHTML += `<div class="tab-pane" id="pic-${index+1}"><img src="${img}" /></div>`
+    }
+    console.log(product);
+
 }
 getdata();

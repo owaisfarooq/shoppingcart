@@ -1,18 +1,22 @@
 var data;
-const url = 'https://fakestoreapi.com/products';
+const url = 'https://dummyjson.com/products';
 async function getdata() {
     const response = await fetch(url);
-    data = await response.json();
+    dataFetched = await response.json();
+    data = dataFetched.products
     console.log(data);
     const list = document.getElementById("productList");
     let noOfCols = 4;
     for (let index = 0; index < data.length; index += noOfCols) {
         let lost = `<div class="row">`;
         for (let k = 0; k < noOfCols; k++) {
+            if (!data[k+index]) {
+                break;
+            }
             lost += `
             <div class="col">
                 <div class="card" style="width: 18rem;">
-                    <img width="50px" height="150px" src="${data[k+index].image}"
+                    <img width="50px" height="150px" src="${data[k+index].thumbnail}"
                         class="card-img-top" alt="headphones">
                     <div class="card-body">
                         <h6 class="item-card-heading card-title">${data[k+index].title}</h6>
@@ -39,7 +43,7 @@ async function carouselFill() {
                     <a href="/product/?id=${product.id}" class="btn btn-primary">view More</a>
                 </div>
                 <div class="col-sm-7">
-                    <img class="img-fluid" src="${product.image}" alt="product image">
+                    <img class="img-fluid" src="${product.images[0]}" alt="product image">
                 </div>
             </div>
         </div>
