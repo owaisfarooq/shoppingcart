@@ -176,7 +176,16 @@ Version:1.0
   100% {-webkit-transform: scale(1, 1); opacity:0;}
 }
 /* End Preloader */
-
+.show-more {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+	color: #ffffff;
+}
+.show-more>.btn {
+    padding: 10px 27px;
+    border-radius: 20px;
+}
 .btn {
 	position: relative;
 	font-weight: 500;
@@ -192,6 +201,7 @@ Version:1.0
 	padding: 13px 32px;
 	border-radius: 0px;
 	text-transform:uppercase;
+	
 }
 .btn:hover{
 	color:#fff;
@@ -650,7 +660,7 @@ Version:1.0
 	background: #fff;
 	position: relative;
 	margin: 0;
-	line-height: 45px;
+	line-height: 18px;
 	border-radius: 5px;
 	border: 1px solid #ececec;
 }
@@ -4944,3 +4954,16 @@ Version:1.0
 /*=============================
 	End Footer CSS
 ===============================*/
+.search-results {
+	width: 324px;
+    background-color: white;
+}
+.search-results>td {
+	padding: 0px;
+}
+.result:hover {
+	background-color: #eeeeee;
+}
+.list-group-item {
+	z-index: 2;
+}

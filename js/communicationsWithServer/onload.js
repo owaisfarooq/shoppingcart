@@ -10,7 +10,10 @@ function getData() {
       
         body: JSON.stringify({
           
-          "LazyLoadEvent": {"first": 0, "rows": 1000}
+            "LazyLoadEvent": {
+                "first": 0,
+                "rows": 50
+            }
           
         }),
         headers: {
@@ -31,7 +34,7 @@ function dataDisplay() {
 
     const dataDisplay = document.getElementById("dataDisplay");
     
-    for (let index = 0; index < 50; index++) {
+    for (let index = 0; index < data.result.length; index++) {
         const element = data.result[index];
         dataDisplay.innerHTML += makeDiv(element);
     }
@@ -44,7 +47,7 @@ function makeDiv(product) {
         <div class="col-xl-3 col-lg-4 col-md-4 col-12">
             <div class="single-product">
                 <div class="product-img">
-                    <a href="product-details.html">
+                    <a href="product/?id=${product.ItemCode}">
                         <img class="default-img" src="${img}" alt="#">
                         <img class="hover-img" src="${img}" alt="#">
                     </a>
@@ -60,7 +63,7 @@ function makeDiv(product) {
                     </div>
                 </div>
                 <div class="product-content">
-                    <h3><a href="product-details.html">${product.ItemName}</a></h3>
+                    <h3><a href="product/?id=${product.ItemCode}">${product.ItemName}</a></h3>
                     <div class="product-price">
                         <span>${product.ItemNetSalePrice}</span>
                     </div>
