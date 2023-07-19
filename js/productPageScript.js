@@ -11,7 +11,7 @@ function getData() {
 
       body: JSON.stringify({
         "Where": {
-          ItemCode: productItemCode.toString()
+          ItemCode: productItemCode
         }
       }),
       headers: {
@@ -48,9 +48,10 @@ function loadDescription() {
 
 function loadImage() {
   const imagesDiv = document.getElementById("images");
-  if (product.ItemImages) {
+  if (product.ItemImages.ItemImageFileName) {
     const productImages = product.ItemImages;
-    imagesDiv.innerHTML = `<img class="active" src="${url+productImages[0].ItemImageFileName}" alt="">`
+    console.log(url + productImages[0].ItemImageFileName);
+    imagesDiv.innerHTML = `<img class="active" src="${url + productImages[0].ItemImageFileName}" alt="">`
     for (let index = 1; index < productImages.length; index++) {
       const productImage = url+productImages[index].ItemImageFileName;
       imagesDiv.innerHTML += 

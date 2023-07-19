@@ -22,7 +22,7 @@ function getData() {
     })
     .then((response) => response.json())
     .then((json) => data = json)
-    .finally(() => dataDisplay());          
+    .finally(() => dataDisplay());
 }
 
 function dataDisplay() {

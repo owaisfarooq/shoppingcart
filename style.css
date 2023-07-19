@@ -748,7 +748,7 @@ Version:1.0
 	top: 0;
 }
 .header.shop .middle-inner {
-	padding: 20px 0;
+	padding: 10px 0 !important;
 	background: #fff;
 	border-top: 1px solid #eee;
 }
@@ -1152,7 +1152,6 @@ Version:1.0
 	width:100%;
 	z-index:999;
 }
-.header.sticky .all-category{}
 .header.sticky .all-category h3{
 	cursor:pointer;
 	
@@ -1164,9 +1163,9 @@ Version:1.0
 	-moz-transition:all 0.4s ease;
 	transition:all 0.4s ease;
 }
-.header.sticky .all-category:hover .main-category{
-	opacity:1;
-	visibility:visible;
+.showCategories{
+	opacity:1 !important;
+	visibility:visible !important;
 }
 .header.sticky .header-inner .nav li a {
 	color: #333;

@@ -1,12 +1,28 @@
 /* Basic Styling */
-html, body {
+/* html, body {
   height: 100%;
   width: 100%;
   margin: 0;
   font-family: 'Roboto', sans-serif;
-}
+} */
 
 .container {
+  /* max-width: 1200px; */
+  width: 100%;
+  margin: 0 auto;
+  /* padding: 15px; */
+  display: flex;
+}
+
+.cat-nav-head {
+  width: 100%;
+}
+
+.row {
+  width: 100%;
+}
+
+.productPageContainer {
   max-width: 1200px;
   margin: 0 auto;
   padding: 15px;
@@ -27,7 +43,7 @@ html, body {
 
 /* Left Column */
 .left-column img {
-  width: 100%;
+  width: 60%;
   position: absolute;
   left: 0;
   top: 0;
