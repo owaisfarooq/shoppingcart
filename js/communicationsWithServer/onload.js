@@ -1,53 +1,57 @@
-let data;
-const url = "http://erpsystems2.ddns.net:6079";
 console.log("js file loaded");
 
-getData();
+let ItemsData;
+let CategoryData;
+totalRows = 0;
+getItems();
 
-function getData() {
-    fetch(url + "/api/Item/getAllLLCustomer", {
+async function getItems(rows = 20) {
+    await apiCall("/api/Item/getAllLLCustomer", {
         method: "POST",
-      
+
         body: JSON.stringify({
-          
             "LazyLoadEvent": {
-                "first": 0,
-                "rows": 50
+                "first": totalRows,
+                "rows": rows
             }
-          
         }),
         headers: {
-          "Content-type": "application/json; charset=UTF-8"
+            "Content-type": "application/json; charset=UTF-8"
         }
+    }, (data) => {
+        ItemsData = data;
+        console.log("data: " + data);
+        dataItemDisplay();
     })
-    .then((response) => response.json())
-    .then((json) => data = json)
-    .finally(() => dataDisplay());
+    totalRows+=rows;
+    // fetch(url + "/api/Item/getAllLLCustomer", {
+    //         method: "POST",
+
+    //         body: JSON.stringify({
+
+    //             "LazyLoadEvent": {
+    //                 "first": 0,
+    //                 "rows": 50
+    //             }
+
+    //         }),
+    //         headers: {
+    //             "Content-type": "application/json; charset=UTF-8"
+    //         }
+    //     })
+    //     .then((response) => response.json())
+    //     .then((json) => ItemsData = json)
+    //     .finally(() => dataItemDisplay());
 }
 
-function dataDisplay() {
-    console.log(data);
-    if (data.status.code !== 0) {
-        console.log(detailError);
-        return 0;
-    }
-
-    const dataDisplay = document.getElementById("dataDisplay");
-    
-    for (let index = 0; index < data.result.length; index++) {
-        const element = data.result[index];
-        dataDisplay.innerHTML += makeDiv(element);
-    }
-}
-
-function makeDiv(product) {
+function makeItemsDiv(product) {
     let img = product.ItemImages[0] ? product.ItemImages[0] : "https://via.placeholder.com/550x750";
-    
+
     return `
         <div class="col-xl-3 col-lg-4 col-md-4 col-12">
             <div class="single-product">
                 <div class="product-img">
-                    <a href="product/?id=${product.ItemCode}">
+                    <a href="product?id=${product.ItemId}">
                         <img class="default-img" src="${img}" alt="#">
                         <img class="hover-img" src="${img}" alt="#">
                     </a>
@@ -58,12 +62,12 @@ function makeDiv(product) {
                             <a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
                         </div>
                         <div class="product-action-2">
-                            <a title="Add to cart" href="#">Add to cart</a>
+                            <a title="Add to cart" onclick="addToCart(${product.ItemId})">Add to cart</a>
                         </div>
                     </div>
                 </div>
                 <div class="product-content">
-                    <h3><a href="product/?id=${product.ItemCode}">${product.ItemName}</a></h3>
+                    <h3><a href="product?id=${product.ItemId}">${product.ItemName}</a></h3>
                     <div class="product-price">
                         <span>${product.ItemNetSalePrice}</span>
                     </div>
@@ -71,4 +75,19 @@ function makeDiv(product) {
             </div>
         </div>
     `;
+}
+
+function dataItemDisplay() {
+    console.log(ItemsData);
+    if (ItemsData.status.code !== 0) {
+        console.log(detailError);
+        return 0;
+    }
+
+    const dataDisplay = document.getElementById("dataDisplay");
+
+    for (let index = 0; index < ItemsData.result.length; index++) {
+        const item = ItemsData.result[index];
+        dataDisplay.innerHTML += makeItemsDiv(item);
+    }
 }

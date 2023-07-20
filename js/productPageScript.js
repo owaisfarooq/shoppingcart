@@ -1,29 +1,25 @@
-const url = "http://erpsystems2.ddns.net:6079";
 const urlParams = new URLSearchParams(window.location.search);
-const productItemCode = urlParams.get('id');
+const productItemId = urlParams.get('id');
 let product;
 let data;
 getData()
 
 function getData() {
-  fetch(url + "/api/Item/getAllLLCustomer", {
-      method: "POST",
-
-      body: JSON.stringify({
-        "Where": {
-          ItemCode: productItemCode
-        }
-      }),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8"
-      }
-    })
-    .then((response) => response.json())
-    .then((json) => data = json)
-    .then(() => product = data.result[0])
-    .then(() => console.log(data))
-    .finally(() => loadProduct())
-
+  apiCall("/api/Item/getById", {
+    method: "POST",
+    
+    body: JSON.stringify({
+      "id":  productItemId
+      
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8"
+    }
+  }, (json) => {
+    data = json
+    product = data.result[0]
+    loadProduct()
+  })
 }
 
 function loadProduct() {
@@ -38,8 +34,8 @@ function loadDescription() {
   const price = document.getElementById("price");
 
   name.innerHTML = product.ItemName;
-  category.innerHTML = data.status.otherdata[0].ItemClassName;
-  price.innerHTML = product.ItemCurSale + " Rs";
+  // category.innerHTML = data..otherdata[0].ItemClassName;
+  price.innerHTML = product.ItemNetSalePrice + " Rs";
 
   if (product.ItemDescription) {
     description.innerHTML = product.ItemDescription;
@@ -61,9 +57,7 @@ function loadImage() {
     }
   } else {
     imagesDiv.innerHTML = `
-    <img data-image="black" src="images/black.png" alt="">
-    <img data-image="blue" src="images/blue.png" alt="">
-    <img data-image="red" class="active" src="images/red.png" alt="">
+    <img src="images/red.png" class="active"/>
   `
   }
 }

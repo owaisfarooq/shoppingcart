@@ -5,7 +5,7 @@ function searchStr() {
 
     const searchParameters = document.getElementById("searchParameters");
     
-    fetch(url + "/api/Item/getAllLLCustomer", {
+    apiCall("/api/Item/getAllLLCustomer", {
         method: "POST",
 
         body: JSON.stringify({
@@ -21,12 +21,11 @@ function searchStr() {
         headers: {
             "Content-type": "application/json; charset=UTF-8"
         }
+    }, (json) => {
+        searchResultsFromServer = json
+        console.log(searchResultsFromServer)
+        showResults()
     })
-    .then((response) => response.json())
-    .then((json) => searchResultsFromServer = json)
-    .then(() => console.log(searchResultsFromServer))
-    .finally(() => showResults())
-
 }
 function showResults() {
     
@@ -34,7 +33,27 @@ function showResults() {
     list.innerHTML = "";
     for (let index = 0; index < searchResultsFromServer.result.length; index++) {
         const element = searchResultsFromServer.result[index];
-        list.innerHTML += `<button type="button" onclick="viewProduct('${element.ItemCode}')" class="list-group-item list-group-item-action">${element.ItemName}</button>`
-        // += `<tr class="result" herf="/product?${element.ItemCode}"><td></td></tr>`;
+        list.innerHTML += `<button type="button" onclick="viewProduct('${element.ItemId}')" class="list-group-item list-group-item-action">${element.ItemName}</button>`
     }
 }
+
+function hideResultsOnClickOutside(event) {
+    const searchResultsContainer = document.querySelector(".search-results");
+    const isClickInsideSearchContainer = searchResultsContainer.contains(event.target);
+
+    if (!isClickInsideSearchContainer) {
+        searchResultsContainer.style.display = "none";
+    }
+}
+
+document.body.addEventListener("click", hideResultsOnClickOutside);
+
+const searchInput = document.getElementById("searchParameters");
+searchInput.addEventListener("click", function (event) {
+    event.stopPropagation();
+});
+
+searchInput.addEventListener("focus", function () {
+    const searchResultsContainer = document.querySelector(".search-results");
+    searchResultsContainer.style.display = "block";
+});

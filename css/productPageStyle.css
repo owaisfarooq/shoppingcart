@@ -6,21 +6,21 @@
   font-family: 'Roboto', sans-serif;
 } */
 
-.container {
+/* .container { */
   /* max-width: 1200px; */
-  width: 100%;
-  margin: 0 auto;
+  /* width: 100%; */
+  /* margin: 0 auto; */
   /* padding: 15px; */
-  display: flex;
-}
+  /* display: flex; */
+/* } */
 
 .cat-nav-head {
   width: 100%;
 }
 
-.row {
+/* .row {
   width: 100%;
-}
+} */
 
 .productPageContainer {
   max-width: 1200px;
@@ -47,7 +47,7 @@
   position: absolute;
   left: 0;
   top: 0;
-  opacity: 0;
+  opacity: 1;
   transition: all 0.3s ease;
 }
 
