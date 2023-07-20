@@ -237,6 +237,7 @@ Version:1.0
 ========================================*/
 /* Topbar */
 .topbar {
+	display: none;
 	background-color: #fff;
 	border-bottom: 1px solid #e2e2e2;
 	padding: 15px 0;
@@ -373,6 +374,7 @@ Version:1.0
 }
 .header.shop .nav-inner {
 	margin-right: 188px;
+	width: 100%;
 }
 .header.shop .logo {
 	float: left;
@@ -618,6 +620,7 @@ Version:1.0
 .header.shop .nav-inner {
 	margin: 0;
 	float: left;
+	width: 100%;
 }
 .header.shop .topbar {
 	background-color: #fff;
@@ -665,6 +668,7 @@ Version:1.0
 	border: 1px solid #ececec;
 }
 .header.shop .nice-select {
+	display: none;
 	clear: initial;
 	margin: 0;
 	height: 48px;
@@ -713,7 +717,7 @@ Version:1.0
 	font-size: 14px;
 	font-weight: 400;
 	padding: 0 25px 0 20px;
-	width: 328px;
+	width: 500px;
 }
 .header.shop .search-bar .btnn {
 	height: 50px;
@@ -964,7 +968,7 @@ Version:1.0
 	position: relative;
 	-webkit-transition: all 0.4s ease;
 	-moz-transition: all 0.4s ease;
-	transition: all 0.4s ease;
+	transition: all 0.4s ease-in;
 }
 .header.shop .nav li:hover a{
 	color:#fff;
@@ -976,7 +980,7 @@ Version:1.0
 }
 .header.shop .nav li.active a{
 	color:#fff;
-	background:#F7941D;
+	background:#000;
 }
 .header.shop.v2 .nav li.active a{
 	color:#333 !important;
@@ -4939,7 +4943,7 @@ Version:1.0
 	border-top:1px solid #eeeeee3d;
 	padding:20px 0;
 }
-.footer .copyright .left{}
+/* .footer .copyright .left{} */
 .footer .copyright .right{
 	float:right;
 }
@@ -4954,8 +4958,9 @@ Version:1.0
 	End Footer CSS
 ===============================*/
 .search-results {
-	width: 324px;
+	width: 474px;
     background-color: white;
+	text-align: left;
 }
 .search-results>td {
 	padding: 0px;
@@ -4965,4 +4970,7 @@ Version:1.0
 }
 .list-group-item {
 	z-index: 2;
+}
+.navbar-nav {
+	justify-content: center !important;
 }
