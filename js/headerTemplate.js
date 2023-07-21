@@ -133,21 +133,19 @@ headerDiv.innerHTML = `
                                 <div class="navbar-collapse">	
                                     <div class="nav-inner">	
                                         <ul class="nav main-menu menu navbar-nav" id="categories">
-                                                <!--<li><a href="#">Shop<i class="ti-angle-down"></i></a>
-                                                    <ul class="dropdown">
-                                                        <li><a href="shop-grid.html">Shop Grid</a></li>
-                                                        <li><a href="cart.html">Cart</a></li>
-                                                        <li><a href="checkout.html">Checkout</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="#">Pages</a></li>									
-                                                <li><a href="#">Blog<i class="ti-angle-down"></i></a>
-                                                    <ul class="dropdown">
-                                                        <li><a href="blog-single-sidebar.html">Blog Single Sidebar</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="/contact">Contact Us</a></li> -->
-                                            </ul>
+                                            <!--<li><a href="#">Shop<i class="ti-angle-down"></i></a>
+                                                <ul class="dropdown">
+                                                    <li><a href="shop-grid.html">Shop Grid</a></li>
+                                                    <li><a href="cart.html">Cart</a></li>
+                                                    <li><a href="checkout.html">Checkout</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Blog<i class="ti-angle-down"></i></a>
+                                                <ul class="dropdown">
+                                                    <li><a href="blog-single-sidebar.html">Blog Single Sidebar</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </nav>
@@ -214,7 +212,7 @@ function calculateColumnCount(childrenCount) {
 
 function makeCategoryDiv(category) {
     let div = `
-        <li><a href="#">${category.ItemClassName}<i class="ti-angle-down"></i></a>
+        <li><a href="shop-grid.html?categoryId=${category.ItemClassId}">${category.ItemClassName}<i class="ti-angle-down"></i></a>
     `
 
     if (category.children) {
@@ -222,7 +220,7 @@ function makeCategoryDiv(category) {
         div += `<ul class="dropdown">`
         for (let index = 0; index < category.children.length; index++) {
             const childCategory = category.children[index];
-            div += `<li><a href="shop-grid.html">${childCategory.ItemClassName}</a></li>`
+            div += `<li><a href="shop-grid.html?categoryId=${childCategory.ItemClassId}">${childCategory.ItemClassName}</a></li>`
         }
         div += `</ul>`
     }
