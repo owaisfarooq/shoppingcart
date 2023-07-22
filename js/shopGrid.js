@@ -1,7 +1,6 @@
 const urlParams = new URLSearchParams(window.location.search);
 const categoryId = urlParams.get('categoryId');
 let CategoryData;
-console.log("shopGrid js file loaded");
 getDataFromCategory(categoryId);
 
 function getDataFromCategory(id) {
@@ -26,7 +25,6 @@ function getDataFromCategory(id) {
 
 }
 function displayResult(data) {
-	console.log(data);
 	const rowDiv = document.getElementById("dataDisplayRow");
 	let products = data.result;
 	products.forEach(product => {
@@ -34,7 +32,9 @@ function displayResult(data) {
 	});
 }
 function makeCategoryResultDiv(product) {
-	let img = "https://via.placeholder.com/550x750";
+
+	const productImages = product.ItemImages;
+	img = url + '/' + encodeURIComponent(productImages[0].ItemImageFileName)
 
 	// if (product.ItemImages !== undefined) {
 	// 	img = product.ItemImages[0]

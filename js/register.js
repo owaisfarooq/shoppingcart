@@ -4,11 +4,12 @@ const email = document.getElementById("email");
 const phoneNumber = document.getElementById("number");
 const pwd = document.getElementById("pwd");
 const pwd2 = document.getElementById("cpwd");
-
+const urlParams = new URLSearchParams(window.location.search);
+const oldUrl = urlParams.get('oldUrl') !== undefined ? urlParams.get('oldUrl') : "index.html";
 
 async function registerNewUser() {
     if (pwd.value !== pwd2.value) {
-        alert("ARE YOU BLIND?")
+        showNotification(`passwords do not match`, "alert-danger");
         return "dumb";
     }
     await apiCall("/api/customer/signup", {
@@ -25,12 +26,16 @@ async function registerNewUser() {
             "Content-type": "application/json; charset=UTF-8"
         }
     }, (data) => {
-        console.log("data: " + data);
-    })
+        if (data.status.code == 0) {
+            showNotification(`User Registered!`, "alert-success");
+        } else {
+            showNotification(response.status.message, "alert-danger");
+        }
+        })
 }
-let token 
+
 async function loginUser() {
-    await apiCall("/api/customer/signin", {
+    await apiCall("/api/customer/login", {
         method: "POST",
 
         body: JSON.stringify({
@@ -41,10 +46,15 @@ async function loginUser() {
             "Content-type": "application/json; charset=UTF-8"
         }
     }, (data) => {
-        token = data.result[0].token;
+        const token = data.result[0].token;
         localStorage.setItem("token", token);
-        const storedToken = localStorage.getItem("token");
-        console.log(storedToken);
-        console.log("data: " + data);
+        if (data.status.code == 0) {
+            getCustomerProfile((profileData) => showNotification(`welcome back ${profileData.result[0].CustomerFirstName}!`, "alert-success"))
+            if (oldUrl) {
+                window.location.replace(oldUrl);
+            }
+        } else {
+            showNotification(response.status.message, "alert-danger");
+        }
     })
 }

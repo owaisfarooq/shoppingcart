@@ -1,5 +1,3 @@
-console.log("js file loaded");
-
 let ItemsData;
 let CategoryData;
 totalRows = 0;
@@ -20,7 +18,6 @@ async function getItems(rows = 20) {
         }
     }, (data) => {
         ItemsData = data;
-        console.log("data: " + data);
         dataItemDisplay();
     })
     totalRows+=rows;
@@ -45,7 +42,7 @@ async function getItems(rows = 20) {
 }
 
 function makeItemsDiv(product) {
-    let img = product.ItemImages[0] ? product.ItemImages[0] : "https://via.placeholder.com/550x750";
+    let img = product.ItemImages[0] ? url + product.ItemImages[0].ItemImageFileName : "https://via.placeholder.com/550x750";
 
     return `
         <div class="col-xl-3 col-lg-4 col-md-4 col-12">
@@ -78,10 +75,8 @@ function makeItemsDiv(product) {
 }
 
 function dataItemDisplay() {
-    console.log(ItemsData);
-    if (ItemsData.status.code !== 0) {
-        console.log(detailError);
-        return 0;
+
+    if (ItemsData.status.code !== 0) {        return 0;
     }
 
     const dataDisplay = document.getElementById("dataDisplay");

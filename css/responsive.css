@@ -365,7 +365,7 @@ Version:1.0
 	position: absolute;
 	position: relative;
 	padding-bottom: 20px;
-	background: #333;
+	background: var(--secondary);
 }
 .slicknav_menu{
 	display:block;
@@ -395,7 +395,7 @@ Version:1.0
 }
 .slicknav_nav li a{
 	margin: 0;
-	color: #333;
+	color: var(--secondary);
 	background: transparent;
 	overflow: hidden;
 }
@@ -540,7 +540,7 @@ Version:1.0
 	margin-bottom: 0;
 }
 .hero-slider .hero-text p {
-	color: #333;
+	color: var(--secondary);
 	margin-bottom: 28px;
 }
 .hero-slider .hero-text .btn {
@@ -615,7 +615,7 @@ Version:1.0
 }
 .hero-area4 .big-content .des {
 	font-size: 13px;
-	color: #333;
+	color: var(--secondary);
 	line-height: 21px;
 }
 .hero-area4 .big-content .button {
@@ -630,7 +630,7 @@ Version:1.0
 	width: 35px;
 	line-height: 32px;
 	font-size: 11px;
-	background:#3336;
+	background:var(--secondary)6;
 }
 .hero-area4 .owl-carousel .owl-nav {
 	margin-top: -16px;
@@ -995,7 +995,7 @@ Version:1.0
 	margin-bottom: 10px;
 	font-size: 14px;
 	font-weight: 300;
-	color:#333;
+	color:var(--secondary);
 }
 .about-us .about-content .button {
 	margin-top: 30px;
@@ -1078,7 +1078,7 @@ Version:1.0
 	position: absolute;
 	position: relative;
 	padding-bottom: 20px;
-	background: #333;
+	background: var(--secondary);
 }
 .slicknav_menu{
 	display:block;
@@ -1108,7 +1108,7 @@ Version:1.0
 }
 .slicknav_nav li a{
 	margin: 0;
-	color: #333;
+	color: var(--secondary);
 	background: transparent;
 	overflow: hidden;
 }
@@ -1221,14 +1221,14 @@ Version:1.0
 	padding: 5px 0;
 	border-bottom: 1px solid #eee;
 	text-align: left;
-	color: #333;
+	color: var(--secondary);
 }
 .header.shop.v3 .topbar .inner-content {
 	border:none;
 	padding: 0;
 }
 .header.shop .list-main li a {
-	color: #333;
+	color: var(--secondary);
 }
 .header.shop .list-main li a:hover{
 	color:#fff;
@@ -1275,7 +1275,7 @@ Version:1.0
 	margin-bottom: 0;
 }
 .hero-slider .hero-text p {
-	color: #333;
+	color: var(--secondary);
 	margin-bottom: 28px;
 }
 .hero-slider .hero-text .btn {

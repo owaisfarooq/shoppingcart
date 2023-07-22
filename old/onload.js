@@ -4,7 +4,6 @@ async function getdata() {
     const response = await fetch(url);
     dataFetched = await response.json();
     data = dataFetched.products
-    console.log(data);
     const list = document.getElementById("productList");
     let noOfCols = 4;
     for (let index = 0; index < data.length; index += noOfCols) {

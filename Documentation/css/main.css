@@ -21,7 +21,7 @@ a, a:hover, a:focus{
 }
 h1, h2, h3,
 h4, h5, h6 {
-    color: #333;
+    color: var(--secondary);
 	margin:0;
     font-weight: normal;
 }
@@ -46,7 +46,7 @@ code {
 }
 
 code a {
-    color: #333;
+    color: var(--secondary);
 }
 
 code a:hover {

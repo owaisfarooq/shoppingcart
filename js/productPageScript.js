@@ -2,15 +2,16 @@ const urlParams = new URLSearchParams(window.location.search);
 const productItemId = urlParams.get('id');
 let product;
 let data;
+
 getData()
 
 function getData() {
   apiCall("/api/Item/getById", {
     method: "POST",
-    
+
     body: JSON.stringify({
-      "id":  productItemId
-      
+      "id": productItemId
+
     }),
     headers: {
       "Content-type": "application/json; charset=UTF-8"
@@ -43,33 +44,16 @@ function loadDescription() {
 }
 
 function loadImage() {
+
   const imagesDiv = document.getElementById("images");
-  if (product.ItemImages.ItemImageFileName) {
-    const productImages = product.ItemImages;
-    console.log(url + productImages[0].ItemImageFileName);
-    imagesDiv.innerHTML = `<img class="active" src="${url + productImages[0].ItemImageFileName}" alt="">`
-    for (let index = 1; index < productImages.length; index++) {
-      const productImage = url+productImages[index].ItemImageFileName;
-      imagesDiv.innerHTML += 
+  const productImages = product.ItemImages;
+
+  imagesDiv.innerHTML = `<img class="active" src="${url + encodeURIComponent(productImages[0].ItemImageFileName)}" alt="">`
+  for (let index = 1; index < productImages.length; index++) {
+    const productImage = url + productImages[index].ItemImageFileName;
+    imagesDiv.innerHTML +=
       `
         <img src="${productImage}" alt="">
       `
-    }
-  } else {
-    imagesDiv.innerHTML = `
-    <img src="images/red.png" class="active"/>
-  `
   }
 }
-
-$(document).ready(function () {
-
-  $('.color-choose input').on('click', function () {
-    var headphonesColor = $(this).attr('data-image');
-
-    $('.active').removeClass('active');
-    $('.left-column img[data-image = ' + headphonesColor + ']').addClass('active');
-    $(this).addClass('active');
-  });
-
-});
