@@ -33,7 +33,7 @@ body {
     border: none;
     margin: 15px 0 50px 0px;
     cursor: pointer;
-    background-color: #333;
+    background-color: var(--secondary);
     font-weight: 700;
     font-size: 0.9rem;
     appearance: unset;
@@ -107,7 +107,7 @@ body {
     border-top-left-radius: 5px;
     border-bottom-right-radius: 5px;
     outline: none;
-    color: #333;
+    color: var(--secondary);
 }
 
 .wrapper .form-right .input-field:focus {
@@ -191,7 +191,7 @@ body {
 }
 
 .wrapper .register:hover {
-    background-color: #333;
+    background-color: var(--secondary);
 }
 
 .wrapper a {
