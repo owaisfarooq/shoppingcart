@@ -34,20 +34,11 @@ function displayResult(data) {
 	});
 }
 function makeCategoryResultDiv(product) {
-<<<<<<< Updated upstream
 	let img = "https://via.placeholder.com/550x750";
-=======
-	let img
+
 	if (product.ItemImages[0]){
 		img = url + '/' + product.ItemImages[0].ItemImageFileName;
-	} else {
-		img = "https://via.placeholder.com/500x700";
 	}
->>>>>>> Stashed changes
-
-	// if (product.ItemImages !== undefined) {
-	// 	img = product.ItemImages[0]
-	// }
 	return `
 	<div class="col-lg-4 col-md-6 col-12">
 		<div class="single-product">

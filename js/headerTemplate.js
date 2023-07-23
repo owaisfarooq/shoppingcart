@@ -1,4 +1,3 @@
-console.log("header template file loaded");
 
 const headerDiv = document.getElementById("header");
 headerDiv.innerHTML = `
@@ -58,7 +57,7 @@ headerDiv.innerHTML = `
                 <div class="col-lg-8 col-md-7 col-12">
                     <div class="search-bar-top">
                         <div class="search-bar">
-                            <select>
+                            <select style="display:none">
                                 <option selected="selected">All Category</option>
                                 <option>watch</option>
                                 <option>mobile</option>
@@ -82,17 +81,17 @@ headerDiv.innerHTML = `
                             <a href="#" class="single-icon"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
                         </div>
                         <div class="sinlge-bar">
-                            <a href="#" class="single-icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
+                            <a herf="login?oldUrl=${encodeURIComponent(window.location.href)}" class="single-icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
                         </div>
                         <div class="sinlge-bar shopping">
                             <a href="/cart" class="single-icon"><i class="ti-bag"></i> <span id="totalProductsCart" class="total-count">2</span></a>
                             <!-- Shopping Item -->
-                            <div class="shopping-item">
+                            <div class="shopping-item" id="shopping-item">
                                 <div class="dropdown-cart-header">
                                     <span id="totalProductsInCart"></span>
                                     <a href="#">View Cart</a>
                                 </div>
-                                <ul class="shopping-list">
+                                <ul class="shopping-list" id="shopping-list">
                                     <li>
                                         <a href="#" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
                                         <a class="cart-img" href="#"><img src="https://via.placeholder.com/70x70" alt="#"></a>
@@ -105,11 +104,11 @@ headerDiv.innerHTML = `
                                         <h4><a href="#">Woman Necklace</a></h4>
                                         <p class="quantity">1x - <span class="amount">$35.00</span></p>
                                     </li>
-                                </ul>
+                                </ul>    
                                 <div class="bottom">
                                     <div class="total">
                                         <span>Total</span>
-                                        <span class="total-amount">$134.00</span>
+                                        <span class="total-amount" id="total">$134.00</span>
                                     </div>
                                     <a href="checkout.html" class="btn animate">Checkout</a>
                                 </div>
@@ -125,8 +124,14 @@ headerDiv.innerHTML = `
     <div class="header-inner">
         <div class="container">
             <div class="cat-nav-head">
-                <div class="row" style="justify-content: center;">
-                    <div class="col-lg-9 col-12">
+                <div class="row" style="    justify-content: center;
+                /* display: block; */
+                margin-left: auto;
+                width: 100%;">
+                    <div class="col-lg-9 col-12" style="
+                    padding-left: 0px;
+                    padding-right: 0px;
+                ">
                         <div class="menu-area">
                             <!-- Main Menu -->
                             <nav class="navbar navbar-expand-lg">

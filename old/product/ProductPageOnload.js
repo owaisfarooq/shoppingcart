@@ -2,7 +2,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get('id');
 
 const url = 'https://dummyjson.com/products/' + id;
-console.log(window.location.href);
+
 async function getdata() {
     const response = await fetch(url);
     var product = await response.json();
@@ -13,7 +13,6 @@ async function getdata() {
         const img = product.images[index];
         tabContent.innerHTML += `<div class="tab-pane" id="pic-${index+1}"><img src="${img}" /></div>`
     }
-    console.log(product);
 
 }
 getdata();

@@ -1,15 +1,5 @@
-<<<<<<< Updated upstream
-const firstName = document.getElementById("first_name");
-const lastName = document.getElementById("last_name");
-const email = document.getElementById("email");
-const phoneNumber = document.getElementById("number");
-const pwd = document.getElementById("pwd");
-const pwd2 = document.getElementById("cpwd");
-
-=======
-const loginPageUrlParams = new URLSearchParams(window.location.search);
-const oldUrl = loginPageUrlParams.get('oldUrl') !== undefined ? loginPageUrlParams.get('oldUrl') : "index.html";
->>>>>>> Stashed changes
+const urlParams = new URLSearchParams(window.location.search);
+const oldUrl = urlParams.get('oldUrl') !== undefined ? urlParams.get('oldUrl') : "index.html";
 
 async function registerNewUser() {
     const firstName = document.getElementById("first_name");
@@ -20,7 +10,7 @@ async function registerNewUser() {
     const pwd2 = document.getElementById("cpwd");
 
     if (pwd.value !== pwd2.value) {
-        alert("ARE YOU BLIND?")
+        showNotification(`passwords do not match`, "alert-danger");
         return "dumb";
     }
     await apiCall("/api/customer/signup", {
@@ -37,21 +27,20 @@ async function registerNewUser() {
             "Content-type": "application/json; charset=UTF-8"
         }
     }, (data) => {
-        console.log("data: " + data);
-    })
+        if (data.status.code == 0) {
+            showNotification(`User Registered!`, "alert-success");
+        } else {
+            showNotification(response.status.message, "alert-danger");
+        }
+        })
 }
-let token 
+
 async function loginUser() {
-<<<<<<< Updated upstream
-    await apiCall("/api/customer/signin", {
-=======
     const email = document.getElementById("email");
     const pwd = document.getElementById("pwd");
     
     await apiCall("/api/customer/login", {
->>>>>>> Stashed changes
         method: "POST",
-
         body: JSON.stringify({
             Email: email.value,
             Password: pwd.value
@@ -60,13 +49,6 @@ async function loginUser() {
             "Content-type": "application/json; charset=UTF-8"
         }
     }, (data) => {
-<<<<<<< Updated upstream
-        token = data.result[0].token;
-        localStorage.setItem("token", token);
-        const storedToken = localStorage.getItem("token");
-        console.log(storedToken);
-        console.log("data: " + data);
-=======
         if (data.status.code == 0) {
             const token = data.result[0].token;
             localStorage.setItem("token", token);
@@ -77,6 +59,5 @@ async function loginUser() {
         } else {
             showNotification(data.status.message, "alert-danger");
         }
->>>>>>> Stashed changes
     })
 }

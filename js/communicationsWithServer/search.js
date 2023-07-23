@@ -1,4 +1,3 @@
-console.log("search js file loaded");
 
 let searchResultsFromServer;
 function searchStr() {
@@ -23,7 +22,6 @@ function searchStr() {
         }
     }, (json) => {
         searchResultsFromServer = json
-        console.log(searchResultsFromServer)
         showResults()
     })
 }

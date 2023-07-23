@@ -59,6 +59,7 @@
 <!-- <script src="js/cat-nav-visability.js"></script> -->
 */
 // const callApiScript = document.c ateElement("script");
+// const callApiScript = document.createElement("script");
 // callApiScript.src = "js/communicationsWithServer/callApi.js";
 // document.body.appendChild(callApiScript)
 
@@ -121,7 +122,6 @@ async function loadScripts() {
     await loadFile ("js/alert.js")
     await loadFile ("js/communicationsWithServer/auth.js")
     await loadFile ("js/headerTemplate.js")
-    
     loadFileScript()
     //await loadFile ("js/colors.js")
     await loadFile ("js/nicesellect.js")

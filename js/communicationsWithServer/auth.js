@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 const storedToken = localStorage.getItem("token");
 getCustomerProfile(storedToken);
 
@@ -13,10 +11,8 @@ function alertUser(returnedData) {
 }
 
 async function getCustomerProfile(callBack) {
-    console.log("storedToken: " + storedToken);
-    
-    
-    await apiCall("/api/customer/getprofile", {
+
+  await apiCall("/api/customer/getprofile", {
         method: "POST",
         body: JSON.stringify({
             "token": storedToken,
@@ -25,9 +21,6 @@ async function getCustomerProfile(callBack) {
             "Content-type": "application/json; charset=UTF-8"
         }
     }, (data) => {
-        
+        callBack(data)
     })
-
-
 }
->>>>>>> Stashed changes
