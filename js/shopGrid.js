@@ -6,23 +6,23 @@ getDataFromCategory(categoryId);
 
 function getDataFromCategory(id) {
 	apiCall("/api/Item/getAllLLCustomer", {
-			method: "POST",
-			headers: {
-				"Content-type": "application/json; charset=UTF-8"
-			},
-			body: JSON.stringify({
-				"LazyLoadEvent": {
-					"first": 0,
-					"rows": 12
-				},
-				"Where": {
-					"ItemItemClassId": id
-				}
-			})
+		method: "POST",
+		headers: {
+			"Content-type": "application/json; charset=UTF-8"
 		},
-		(data) => {
-			displayResult(data);
-		});
+		body: JSON.stringify({
+			"LazyLoadEvent": {
+				"first": 0,
+				"rows": 12
+			},
+			"Where": {
+				"ItemItemClassId": id
+			}
+		})
+	},
+	(data) => {
+		displayResult(data);
+	});
 
 }
 function displayResult(data) {
@@ -34,7 +34,16 @@ function displayResult(data) {
 	});
 }
 function makeCategoryResultDiv(product) {
+<<<<<<< Updated upstream
 	let img = "https://via.placeholder.com/550x750";
+=======
+	let img
+	if (product.ItemImages[0]){
+		img = url + '/' + product.ItemImages[0].ItemImageFileName;
+	} else {
+		img = "https://via.placeholder.com/500x700";
+	}
+>>>>>>> Stashed changes
 
 	// if (product.ItemImages !== undefined) {
 	// 	img = product.ItemImages[0]
@@ -54,7 +63,7 @@ function makeCategoryResultDiv(product) {
 						<a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
 					</div>
 					<div class="product-action-2">
-						<a title="Add to cart" href="addToCart(${product.ItemId})">Add to cart</a>
+						<a title="Add to cart" style="/*border: none;background: #e6e6e600;*/" onclick="addToCart(${product.ItemId})">Add to cart</a>
 					</div>
 				</div>
 			</div>

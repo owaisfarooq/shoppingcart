@@ -44,6 +44,7 @@ function loadDescription() {
 
 function loadImage() {
   const imagesDiv = document.getElementById("images");
+<<<<<<< Updated upstream
   if (product.ItemImages.ItemImageFileName) {
     const productImages = product.ItemImages;
     console.log(url + productImages[0].ItemImageFileName);
@@ -51,6 +52,20 @@ function loadImage() {
     for (let index = 1; index < productImages.length; index++) {
       const productImage = url+productImages[index].ItemImageFileName;
       imagesDiv.innerHTML += 
+=======
+  const productImages = product.ItemImages;
+  let img
+  if (product.ItemImages[0]) {
+    img = url + encodeURIComponent(productImages[0].ItemImageFileName)
+  } else {
+    img = "https://via.placeholder.com/1200x700"
+  }
+
+  imagesDiv.innerHTML = `<img class="active" src="${img}" alt="">`
+  for (let index = 1; index < productImages.length; index++) {
+    const productImage = url + productImages[index].ItemImageFileName;
+    imagesDiv.innerHTML +=
+>>>>>>> Stashed changes
       `
         <img src="${productImage}" alt="">
       `
