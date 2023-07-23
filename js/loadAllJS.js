@@ -58,6 +58,7 @@
 <!-- category div visibilty Js -->
 <!-- <script src="js/cat-nav-visability.js"></script> -->
 */
+// const callApiScript = document.c ateElement("script");
 // const callApiScript = document.createElement("script");
 // callApiScript.src = "js/communicationsWithServer/callApi.js";
 // document.body.appendChild(callApiScript)
@@ -134,6 +135,7 @@ async function loadScripts() {
     await loadFile ("js/onepage-nav.min.js")
     await loadFile ("js/easing.js")
     await loadFile ("js/active.js")
+    // await loadFile ("js/shopGrid.js")
     await loadFile ("js/communicationsWithServer/cart.js")
     // await loadFile ("js/communicationsWithServer/onload.js")
     await loadFile ("js/communicationsWithServer/search.js")

@@ -1,3 +1,3 @@
 function viewProduct(id) {
-    window.location.replace("product?id=" + id);
+    window.location.replace("product.html?id=" + id);
 }

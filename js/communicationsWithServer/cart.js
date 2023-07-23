@@ -1,4 +1,4 @@
-const cartData = localStorage.getItem("cart");
+const storedToken = localStorage.getItem("token");
 
 async function addToCart(id) {
    
@@ -21,6 +21,41 @@ async function addToCart(id) {
             showNotification(response.status.message, "alert-danger");
         }
     })
+}
+updateCart()
+async function updateCart() {
+    const shoppingCartlist = document.getElementById("shopping-list");
+    const totalProductsCart = document.getElementById("totalProductsCart");
+    const totalProductsInCart = document.getElementById("totalProductsInCart");
+    const totalPriceOfCart = document.getElementById("total");
+    getCustomerCart( (cart) => {
+        totalPriceOfCart.innerHTML = cart.CartNetAmountTotal + " Rs";
+        totalProductsInCart.innerHTML = cart.CartQTYTotal + " Items";
+        totalProductsCart.innerHTML = cart.CartQTYTotal;
+        shoppingCartlist.innerHTML = "";
+        for (let index = cart.Detail.length-3; index < cart.Detail.length; index++) {
+        
+            const item = cart.Detail[index].Item;
+            shoppingCartlist.innerHTML += makeCartDiv(item);
+        }
+    })
+}
+
+async function getCustomerCart(callback) {
+    await apiCall("/api/cart/getCustomerCart", {
+        method: "POST",
+        body: JSON.stringify({
+            "token": storedToken,
+        }),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    }, (data) => {
+        callback(data.result[0])
+    })        
+}
+
+=======
 }
 
 function updateCart(cart) {

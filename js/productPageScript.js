@@ -47,13 +47,13 @@ function loadImage() {
 
   const imagesDiv = document.getElementById("images");
   const productImages = product.ItemImages;
+  let img
+  if (product.ItemImages[0]) {
+    img = url + encodeURIComponent(productImages[0].ItemImageFileName)
+  } else {
+    img = "https://via.placeholder.com/1200x700"
+  }
 
-  imagesDiv.innerHTML = `<img class="active" src="${url + encodeURIComponent(productImages[0].ItemImageFileName)}" alt="">`
-  for (let index = 1; index < productImages.length; index++) {
-    const productImage = url + productImages[index].ItemImageFileName;
-    imagesDiv.innerHTML +=
-      `
-        <img src="${productImage}" alt="">
-      `
+  imagesDiv.innerHTML = `<img class="active" src="${img}" alt="">`
   }
 }

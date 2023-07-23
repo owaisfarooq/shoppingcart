@@ -84,11 +84,11 @@ headerDiv.innerHTML = `
                             <a herf="login?oldUrl=${encodeURIComponent(window.location.href)}" class="single-icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
                         </div>
                         <div class="sinlge-bar shopping">
-                            <a href="#" class="single-icon"><i class="ti-bag"></i> <span class="total-count">2</span></a>
+                            <a href="/cart" class="single-icon"><i class="ti-bag"></i> <span id="totalProductsCart" class="total-count">2</span></a>
                             <!-- Shopping Item -->
                             <div class="shopping-item" id="shopping-item">
                                 <div class="dropdown-cart-header">
-                                    <span>2 Items</span>
+                                    <span id="totalProductsInCart"></span>
                                     <a href="#">View Cart</a>
                                 </div>
                                 <ul class="shopping-list" id="shopping-list">

@@ -11,10 +11,16 @@ function alertUser(returnedData) {
 }
 
 async function getCustomerProfile(callBack) {
-    // console.log("callback: " + callBack);
-    await apiCall("/api/customer/getprofile", {method: "POST",body: JSON.stringify({"token": storedToken,}),headers: {"Content-type": "application/json; charset=UTF-8"}
+
+  await apiCall("/api/customer/getprofile", {
+        method: "POST",
+        body: JSON.stringify({
+            "token": storedToken,
+        }),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
     }, (data) => {
-        let abc = data
-        // callBack(abc);
+        callBack(data)
     })
 }

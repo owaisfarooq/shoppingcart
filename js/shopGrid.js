@@ -1,30 +1,32 @@
 const urlParams = new URLSearchParams(window.location.search);
 const categoryId = urlParams.get('categoryId');
 let CategoryData;
+console.log("shopGrid js file loaded");
 getDataFromCategory(categoryId);
 
 function getDataFromCategory(id) {
 	apiCall("/api/Item/getAllLLCustomer", {
-			method: "POST",
-			headers: {
-				"Content-type": "application/json; charset=UTF-8"
-			},
-			body: JSON.stringify({
-				"LazyLoadEvent": {
-					"first": 0,
-					"rows": 12
-				},
-				"Where": {
-					"ItemItemClassId": id
-				}
-			})
+		method: "POST",
+		headers: {
+			"Content-type": "application/json; charset=UTF-8"
 		},
-		(data) => {
-			displayResult(data);
-		});
+		body: JSON.stringify({
+			"LazyLoadEvent": {
+				"first": 0,
+				"rows": 12
+			},
+			"Where": {
+				"ItemItemClassId": id
+			}
+		})
+	},
+	(data) => {
+		displayResult(data);
+	});
 
 }
 function displayResult(data) {
+	console.log(data);
 	const rowDiv = document.getElementById("dataDisplayRow");
 	let products = data.result;
 	products.forEach(product => {
@@ -32,13 +34,11 @@ function displayResult(data) {
 	});
 }
 function makeCategoryResultDiv(product) {
+	let img = "https://via.placeholder.com/550x750";
 
-	const productImages = product.ItemImages;
-	img = url + '/' + encodeURIComponent(productImages[0].ItemImageFileName)
-
-	// if (product.ItemImages !== undefined) {
-	// 	img = product.ItemImages[0]
-	// }
+	if (product.ItemImages[0]){
+		img = url + '/' + product.ItemImages[0].ItemImageFileName;
+	}
 	return `
 	<div class="col-lg-4 col-md-6 col-12">
 		<div class="single-product">
@@ -54,7 +54,7 @@ function makeCategoryResultDiv(product) {
 						<a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
 					</div>
 					<div class="product-action-2">
-						<a title="Add to cart" href="addToCart(${product.ItemId})">Add to cart</a>
+						<a title="Add to cart" style="/*border: none;background: #e6e6e600;*/" onclick="addToCart(${product.ItemId})">Add to cart</a>
 					</div>
 				</div>
 			</div>
