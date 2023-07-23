@@ -36,7 +36,9 @@ function loadDescription() {
 
   name.innerHTML = product.ItemName;
   // category.innerHTML = data..otherdata[0].ItemClassName;
-  price.innerHTML = product.ItemNetSalePrice + " Rs";
+  price.innerHTML = ` 
+  <span>${product.ItemNetSalePrice} Rs</span>
+  <button onclick="addToCart(${product.ItemId})" class="cart-btn">Add to cart</button>`
 
   if (product.ItemDescription) {
     description.innerHTML = product.ItemDescription;
@@ -55,5 +57,4 @@ function loadImage() {
   }
 
   imagesDiv.innerHTML = `<img class="active" src="${img}" alt="">`
-  }
 }

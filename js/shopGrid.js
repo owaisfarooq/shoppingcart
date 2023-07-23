@@ -1,7 +1,7 @@
 const urlParams = new URLSearchParams(window.location.search);
 const categoryId = urlParams.get('categoryId');
 let CategoryData;
-console.log("shopGrid js file loaded");
+
 getDataFromCategory(categoryId);
 
 function getDataFromCategory(id) {
@@ -26,7 +26,6 @@ function getDataFromCategory(id) {
 
 }
 function displayResult(data) {
-	console.log(data);
 	const rowDiv = document.getElementById("dataDisplayRow");
 	let products = data.result;
 	products.forEach(product => {

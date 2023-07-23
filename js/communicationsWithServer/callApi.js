@@ -1,4 +1,4 @@
-const url = "https://punjabcashandcarry.com.pk:9091";
+const url = "http://erpsystems2.ddns.net:6079";
 /**
  * @param {api} string
  * @param {payload} object

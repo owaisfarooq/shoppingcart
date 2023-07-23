@@ -1,9 +1,7 @@
 populateAllCart();
 let oldCart;
 async function changeItemQty(itemId, qty) {
-    // console.log("oldCart", oldCart);
     let newValue = Number(oldCart.ItemCurSale) + Number(qty);
-
 
     for (let index = 0; index < oldCart.Detail.length; index++) {
         let oldCartId = oldCart.Detail[index].Item.ItemId
@@ -13,12 +11,6 @@ async function changeItemQty(itemId, qty) {
         }
     }
 
-
-    console.log({
-        "token": storedToken,
-        "ItemId": itemId,
-        "CartDetailQTY": newValue
-    });
     await apiCall("/api/Cart/SetItemQTY", {
         method: "POST",
         body: JSON.stringify({
@@ -40,20 +32,6 @@ async function changeItemQty(itemId, qty) {
         let cart = data.result[0];
         oldCart = cart;
 
-        // cart.sort((a, b) => {
-        //     if (a.ItemId > b.ItemId) {
-        //         console.log("a.ItemId > b.ItemId", a.ItemId , b.ItemId)
-        //         return 1;
-        //     } if (a.ItemId < b.ItemId) {
-        //         console.log("a.ItemId < b.ItemId", a.ItemId , b.ItemId)
-        //         return -1;
-        //     } else {
-        //         console.log("a.ItemId == b.ItemId", a.ItemId , b.ItemId)
-        //         return 0;
-        //     }
-
-        // })
-
         for (let index = 0; index < cart.Detail.length; index++) {
             const item = cart.Detail[index];
             cartItemDisplayDiv.innerHTML += makeItemDiv(item)
@@ -66,20 +44,7 @@ function populateAllCart() {
     const cartItemDisplayDiv = document.getElementById("cartItemDisplay");
     cartItemDisplayDiv.innerHTML = "";
     getCustomerCart((cart) => {
-        console.log(cart);
         oldCart = cart;
-        // cart.sort((a, b) => {
-        //     if (a.ItemId > b.ItemId) {
-        //         console.log("a.ItemId > b.ItemId", a.ItemId , b.ItemId)
-        //         return 1;
-        //     } if (a.ItemId < b.ItemId) {
-        //         console.log("a.ItemId < b.ItemId", a.ItemId , b.ItemId)
-        //         return -1;
-        //     } else {
-        //         console.log("a.ItemId == b.ItemId", a.ItemId , b.ItemId)
-        //         return 0;
-        //     }   
-        // })
         for (let index = 0; index < cart.Detail.length; index++) {
             const item = cart.Detail[index];
             cartItemDisplayDiv.innerHTML += makeItemDiv(item)
@@ -90,7 +55,7 @@ function populateAllCart() {
 function makeItemDiv(item) {
 
     let img = "https://via.placeholder.com/100x100";
-    console.log("item", item);
+
     return `
         <tr>
             <td class="image" data-title="No"><img src="${img}" alt="#"></td>

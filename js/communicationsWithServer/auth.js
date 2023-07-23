@@ -1,6 +1,4 @@
 const storedToken = localStorage.getItem("token");
-getCustomerProfile(storedToken);
-
 
 function alertUser(returnedData) {
     // if (returnedData.status.code == 0) {

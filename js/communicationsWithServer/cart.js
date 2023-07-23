@@ -1,7 +1,5 @@
-const storedToken = localStorage.getItem("token");
-
 async function addToCart(id) {
-   
+    const storedToken = localStorage.getItem("token");   
     await apiCall("/api/cart/addtocart", {
         method: "POST",
 
@@ -28,11 +26,12 @@ async function updateCart() {
     const totalProductsCart = document.getElementById("totalProductsCart");
     const totalProductsInCart = document.getElementById("totalProductsInCart");
     const totalPriceOfCart = document.getElementById("total");
-    getCustomerCart( (cart) => {
+    getCustomerCart((cart) => {
         totalPriceOfCart.innerHTML = cart.CartNetAmountTotal + " Rs";
         totalProductsInCart.innerHTML = cart.CartQTYTotal + " Items";
         totalProductsCart.innerHTML = cart.CartQTYTotal;
         shoppingCartlist.innerHTML = "";
+        
         for (let index = cart.Detail.length-3; index < cart.Detail.length; index++) {
         
             const item = cart.Detail[index].Item;
@@ -42,6 +41,8 @@ async function updateCart() {
 }
 
 async function getCustomerCart(callback) {
+    const storedToken = localStorage.getItem("token");
+
     await apiCall("/api/cart/getCustomerCart", {
         method: "POST",
         body: JSON.stringify({
@@ -55,17 +56,6 @@ async function getCustomerCart(callback) {
     })        
 }
 
-=======
-}
-
-function updateCart(cart) {
-    const shoppingCartlist = document.getElementById("shopping-list");
-    // shoppingCartDiv.innerHTML = "";
-    for (let index = 0; index < cart.Detail.length; index++) {
-        const item = cart.Detail[index].Item;
-        shoppingCartlist.innerHTML += makeCartDiv(item);
-    }
-}
 function makeCartDiv(item) {
     return `
     <li>
