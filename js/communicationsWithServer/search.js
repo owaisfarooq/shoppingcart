@@ -1,4 +1,3 @@
-
 let searchResultsFromServer;
 function searchStr() {
 

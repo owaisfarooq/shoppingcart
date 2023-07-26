@@ -1,4 +1,3 @@
-
 const headerDiv = document.getElementById("header");
 headerDiv.innerHTML = `
     <!-- Topbar -->
@@ -81,18 +80,18 @@ headerDiv.innerHTML = `
                             <a href="#" class="single-icon"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
                         </div>
                         <div class="sinlge-bar">
-                            <a herf="login?oldUrl=${encodeURIComponent(window.location.href)}" class="single-icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
+                            <a href="login.html?oldUrl=${encodeURIComponent(window.location.href)}" class="single-icon"><i  class="fa fa-user-circle-o" aria-hidden="true"></i></a>
                         </div>
                         <div class="sinlge-bar shopping">
-                            <a href="/cart" class="single-icon"><i class="ti-bag"></i> <span id="totalProductsCart" class="total-count">2</span></a>
+                            <a href="cart.html"  class="single-icon"><i class="ti-bag"></i> <span id="totalProductsCart" class="total-count">0</span></a>
                             <!-- Shopping Item -->
                             <div class="shopping-item" id="shopping-item">
                                 <div class="dropdown-cart-header">
                                     <span id="totalProductsInCart"></span>
-                                    <a href="#">View Cart</a>
+                                    <a href="cart.html">View Cart</a>
                                 </div>
                                 <ul class="shopping-list" id="shopping-list">
-                                    <li>
+<!--                                    <li>
                                         <a href="#" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
                                         <a class="cart-img" href="#"><img src="https://via.placeholder.com/70x70" alt="#"></a>
                                         <h4><a href="#">Woman Ring</a></h4>
@@ -102,8 +101,8 @@ headerDiv.innerHTML = `
                                         <a href="#" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
                                         <a class="cart-img" href="#"><img src="https://via.placeholder.com/70x70" alt="#"></a>
                                         <h4><a href="#">Woman Necklace</a></h4>
-                                        <p class="quantity">1x - <span class="amount">$35.00</span></p>
-                                    </li>
+                                        <p class="quantity">1x - <span class="amount">0 Rs</span></p>
+                                    </li>-->
                                 </ul>    
                                 <div class="bottom">
                                     <div class="total">
@@ -175,6 +174,9 @@ function getCategoryData() {
     (data) => {
         CategoryData = data;
         dataCategoriesDisplay();
+        displayBanners(data)
+        populateCategories(data.result);
+        return data;
     });
 }
 

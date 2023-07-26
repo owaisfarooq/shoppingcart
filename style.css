@@ -1892,7 +1892,7 @@ Version:1.0
 
 .small-banner .single-banner a {
 	color: var(--secondary);
-	margin-top: 22px;
+	/* margin-top: 22px; */
 	display: block;
 	font-size: 12px;
 	font-weight: 500;

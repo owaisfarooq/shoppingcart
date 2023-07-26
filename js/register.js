@@ -29,9 +29,9 @@ async function registerNewUser() {
     }, (data) => {
         if (data.status.code == 0) {
             showNotification(`User Registered!`, "alert-success");
-        } else {
-            showNotification(response.status.message, "alert-danger");
+            return 0;
         }
+        showNotification(response.status.message, "alert-danger");
         })
 }
 

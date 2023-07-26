@@ -25,6 +25,23 @@ function getDataFromCategory(id) {
 	});
 
 }
+
+async function populateCategories (categories) {
+	const categoryTab = document.getElementById("categoryTab");
+	categoryTab.innerHTML += `<ul class="categor-list">`;
+	// const  = await getCategoryData().result;
+	console.log(categories);
+	for (let index = 0; index < categories.length; index++) {
+		if (categoryId == categories[index].ItemClassId) {
+			for (let jindex = 0; jindex < categories[index].children.length; jindex++) {
+				const category = categories[index].children[jindex];
+				categoryTab.innerHTML += `<li><a href="shop-grid.html?categoryId=${category.ItemClassId}">${category.ItemClassName}</a></li>`;
+			}
+		}
+	}
+	categoryTab.innerHTML += `</ul>`;
+}
+
 function displayResult(data) {
 	const rowDiv = document.getElementById("dataDisplayRow");
 	let products = data.result;
@@ -42,7 +59,7 @@ function makeCategoryResultDiv(product) {
 	<div class="col-lg-4 col-md-6 col-12">
 		<div class="single-product">
 			<div class="product-img">
-				<a href="/product?id=${product.ItemId}">
+				<a href="product.html?id=${product.ItemId}">
 					<img class="default-img" src="${img}" alt="#">
 					<img class="hover-img" src="${img}" alt="#">
 				</a>
@@ -58,7 +75,7 @@ function makeCategoryResultDiv(product) {
 				</div>
 			</div>
 			<div class="product-content">
-				<h3><a href="product-details.html">${product.ItemName}</a></h3>
+				<h3><a href="product.html">${product.ItemName}</a></h3>
 				<div class="product-price">
 					<span>${product.ItemNetSalePrice}</span>
 				</div>

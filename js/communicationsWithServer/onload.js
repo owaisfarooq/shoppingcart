@@ -3,16 +3,49 @@ let CategoryData;
 totalRows = 0;
 getItems();
 
+// async function getTopSellingProducts() {
+//     await apiCall("/api/Item/getTopSellingProducts", {
+//         method: "POST",
+//     }, (data) => {
+//         if (data.status.code != 0) {
+//             showNotification(data.status.message, "alert-danger")
+//         }
+//         displayTopSellingProducts(data.result)
+//     })
+// }
+
+async function displayBanners(data) {
+    const bannersDiv = document.getElementById("banners");
+    
+    for (let index = 0; index < 3; index++) {
+        let category = data.result[index];
+        bannersDiv.innerHTML += makeBannerDiv(category)
+    }
+}
+function makeBannerDiv(category) {
+    return `
+        <div class="col-lg-4 col-12">
+            <div class="single-banner tab-height">
+                <img src="https://via.placeholder.com/600x370" alt="#">
+                <div class="content">
+                    <p>${category.ItemClassName}</p>
+                    <a href="shop-grid.html?categoryId=${category.ItemClassId}">Discover Now</a>
+                </div>
+            </div>
+        </div>
+    `
+}
+
 async function getItems(rows = 20) {
     await apiCall("/api/Item/getAllLLCustomer", {
         method: "POST",
 
-        body: JSON.stringify({
-            "LazyLoadEvent": {
-                "first": totalRows,
-                "rows": rows
-            }
-        }),
+        // body: JSON.stringify({
+        //     "LazyLoadEvent": {
+        //         "first": totalRows,
+        //         "rows": rows
+        //     }
+        // }),
         headers: {
             "Content-type": "application/json; charset=UTF-8"
         }
@@ -21,24 +54,30 @@ async function getItems(rows = 20) {
         dataItemDisplay();
     })
     totalRows+=rows;
-    // fetch(url + "/api/Item/getAllLLCustomer", {
-    //         method: "POST",
+}
 
-    //         body: JSON.stringify({
+async function getItems(rows = 20) {
+    await apiCall("/api/Item/getTopSellingProducts", {
+        method: "POST",
 
-    //             "LazyLoadEvent": {
-    //                 "first": 0,
-    //                 "rows": 50
-    //             }
+        // body: JSON.stringify({
+        //     "LazyLoadEvent": {
+        //         "first": totalRows,
+        //         "rows": rows
+        //     }
+        // }),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    }, (data) => {
+        ItemsData = data;
+        dataItemDisplay();
+    })
+    totalRows+=rows;
+}
 
-    //         }),
-    //         headers: {
-    //             "Content-type": "application/json; charset=UTF-8"
-    //         }
-    //     })
-    //     .then((response) => response.json())
-    //     .then((json) => ItemsData = json)
-    //     .finally(() => dataItemDisplay());
+function displayTopSellingProducts(products) {
+    
 }
 
 function makeItemsDiv(product) {
@@ -48,7 +87,7 @@ function makeItemsDiv(product) {
         <div class="col-xl-3 col-lg-4 col-md-4 col-12">
             <div class="single-product">
                 <div class="product-img">
-                    <a href="product?id=${product.ItemId}">
+                    <a href="product.html?id=${product.ItemId}">
                         <img class="default-img" src="${img}" alt="#">
                         <img class="hover-img" src="${img}" alt="#">
                     </a>
@@ -64,7 +103,7 @@ function makeItemsDiv(product) {
                     </div>
                 </div>
                 <div class="product-content">
-                    <h3><a href="product?id=${product.ItemId}">${product.ItemName}</a></h3>
+                    <h3><a href="product.html?id=${product.ItemId}">${product.ItemName}</a></h3>
                     <div class="product-price">
                         <span>${product.ItemNetSalePrice}</span>
                     </div>
@@ -76,7 +115,8 @@ function makeItemsDiv(product) {
 
 function dataItemDisplay() {
 
-    if (ItemsData.status.code !== 0) {        return 0;
+    if (ItemsData.status.code !== 0) {
+        return 0;
     }
 
     const dataDisplay = document.getElementById("dataDisplay");

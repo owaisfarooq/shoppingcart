@@ -19,7 +19,7 @@ async function getdata() {
                         class="card-img-top" alt="headphones">
                     <div class="card-body">
                         <h6 class="item-card-heading card-title">${data[k+index].title}</h6>
-                        <a href="/product/?id=${data[k+index].id}" class="btn btn-primary">view More</a>
+                        <a href="product.html/?id=${data[k+index].id}" class="btn btn-primary">view More</a>
                     </div>
                 </div>
             </div>
@@ -39,7 +39,7 @@ async function carouselFill() {
                 <div class="col-sm-5" style="margin-top: auto;margin-bottom: auto;">
                     <h1>${product.title}</h1>
                     <p>${product.description}</p>
-                    <a href="/product/?id=${product.id}" class="btn btn-primary">view More</a>
+                    <a href="product.html/?id=${product.id}" class="btn btn-primary">view More</a>
                 </div>
                 <div class="col-sm-7">
                     <img class="img-fluid" src="${product.images[0]}" alt="product image">

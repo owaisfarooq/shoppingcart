@@ -60,7 +60,7 @@ function makeItemDiv(item) {
         <tr>
             <td class="image" data-title="No"><img src="${img}" alt="#"></td>
             <td class="product-des" data-title="Description">
-                <p class="product-name"><a href="product?id=${item.Item.ItemId}">${item.Item.ItemName}</a></p>
+                <p class="product-name"><a href="product.html?id=${item.Item.ItemId}">${item.Item.ItemName}</a></p>
                 <p class="product-des">${item.Item.ItemDescription}</p>
             </td>
             <td class="price" data-title="Price"><span>${item.CartDetailUnitCost} Rs</span></td>
