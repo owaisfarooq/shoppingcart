@@ -16,12 +16,13 @@ getItems();
 
 async function displayBanners(data) {
     const bannersDiv = document.getElementById("banners");
-    
+
     for (let index = 0; index < 3; index++) {
         let category = data.result[index];
         bannersDiv.innerHTML += makeBannerDiv(category)
     }
 }
+
 function makeBannerDiv(category) {
     return `
         <div class="col-lg-4 col-12">
@@ -36,36 +37,11 @@ function makeBannerDiv(category) {
     `
 }
 
-async function getItems(rows = 20) {
-    await apiCall("/api/Item/getAllLLCustomer", {
-        method: "POST",
-
-        // body: JSON.stringify({
-        //     "LazyLoadEvent": {
-        //         "first": totalRows,
-        //         "rows": rows
-        //     }
-        // }),
-        headers: {
-            "Content-type": "application/json; charset=UTF-8"
-        }
-    }, (data) => {
-        ItemsData = data;
-        dataItemDisplay();
-    })
-    totalRows+=rows;
-}
 
 async function getItems(rows = 20) {
     await apiCall("/api/Item/getTopSellingProducts", {
         method: "POST",
 
-        // body: JSON.stringify({
-        //     "LazyLoadEvent": {
-        //         "first": totalRows,
-        //         "rows": rows
-        //     }
-        // }),
         headers: {
             "Content-type": "application/json; charset=UTF-8"
         }
@@ -73,18 +49,18 @@ async function getItems(rows = 20) {
         ItemsData = data;
         dataItemDisplay();
     })
-    totalRows+=rows;
+    totalRows += rows;
 }
 
 function displayTopSellingProducts(products) {
-    
+
 }
 
 function makeItemsDiv(product) {
     let img = product.ItemImages[0] ? url + product.ItemImages[0].ItemImageFileName : "https://via.placeholder.com/550x750";
 
     return `
-        <div class="col-xl-3 col-lg-4 col-md-4 col-12">
+        <div class="col-xl-2 col-lg-4 col-md-4 col-12">
             <div class="single-product">
                 <div class="product-img">
                     <a href="product.html?id=${product.ItemId}">
@@ -115,14 +91,41 @@ function makeItemsDiv(product) {
 
 function dataItemDisplay() {
 
-    if (ItemsData.status.code !== 0) {
-        return 0;
-    }
-
     const dataDisplay = document.getElementById("dataDisplay");
 
     for (let index = 0; index < ItemsData.result.length; index++) {
         const item = ItemsData.result[index];
         dataDisplay.innerHTML += makeItemsDiv(item);
     }
+}
+
+populateCarousel()
+
+async function populateCarousel() {
+    await apiCall("/api/DynamicContentType/getCarouselImages", {method: "POST"}, (carousel) => {
+        const carouselDiv = document.getElementById("carousel-inner")
+
+        carouselDiv.innerHTML += makeCarouselDiv(url + carousel.result[1].DynamicContents[0].DynamicContentDiskPath + "/" + carousel.result[1].DynamicContents[0].DynamicContentSafeFileName, true);
+
+        for (let indexForCarousel = 1; indexForCarousel < carousel.result[1].DynamicContents.length; indexForCarousel++) {
+            carouselDiv.innerHTML += makeCarouselDiv(url + carousel.result[1].DynamicContents[indexForCarousel].DynamicContentDiskPath + "/" + carousel.result[1].DynamicContents[indexForCarousel].DynamicContentSafeFileName);
+            
+        }
+    })
+}
+
+function makeCarouselDiv(image, isActive = false) {
+    if (isActive) {
+        return `
+            <div class="carousel-item active">
+            <img src=${image} class="d-block w-100" />
+            </div>
+        `
+        
+    }
+    return `
+        <div class="carousel-item">
+        <img src=${image} class="d-block w-100" />
+        </div>
+    `
 }

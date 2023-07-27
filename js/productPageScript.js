@@ -38,23 +38,39 @@ function loadDescription() {
   // category.innerHTML = data..otherdata[0].ItemClassName;
   price.innerHTML = ` 
   <span>${product.ItemNetSalePrice} Rs</span>
-  <button onclick="addToCart(${product.ItemId})" class="cart-btn">Add to cart</button>`
+  <!--<button onclick="addToCart(${product.ItemId})" class="cart-btn">Add to cart</button>-->`
 
   if (product.ItemDescription) {
     description.innerHTML = product.ItemDescription;
   }
 }
 
-function loadImage() {
 
-  const imagesDiv = document.getElementById("images");
+function loadImage() {
+  
+  const imagesDiv = document.getElementById("thumbnail");
   const productImages = product.ItemImages;
+  const main_product_image = document.getElementById("main_product_image");
   let img
+  imagesDiv.innerHTML = "";
+  
   if (product.ItemImages[0]) {
+    main_product_image.src = url + encodeURIComponent(productImages[0].ItemImageFileName);
     img = url + encodeURIComponent(productImages[0].ItemImageFileName)
   } else {
+    main_product_image.src = "https://via.placeholder.com/1200x900";
     img = "https://via.placeholder.com/1200x700"
   }
+  
+  for (let index = 0; index < 3; index++) {
+    imagesDiv.innerHTML += `<img class="mx-3" onclick="changeImage(this)" src="${img}" width="70">`
+  }
+}
 
-  imagesDiv.innerHTML = `<img class="active" src="${img}" alt="">`
+function changeImage(element) {
+
+  var main_prodcut_image = document.getElementById('main_product_image');
+  main_prodcut_image.src = element.src;
+  
+
 }

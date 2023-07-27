@@ -193,6 +193,7 @@ function dataCategoriesDisplay() {
     sortCategories()
 
     const categoriesDiv = document.getElementById("categories");
+
     for (let index = 0; index < CategoryData.result.length; index++) {
         const category = CategoryData.result[index];
         categoriesDiv.innerHTML += makeCategoryDiv(category);
@@ -211,7 +212,7 @@ function dataCategoriesDisplay() {
 
 function calculateColumnCount(childrenCount) {
     const maxColumns = 6;
-    const columnCount = Math.min(maxColumns, Math.ceil(childrenCount / 5));
+    const columnCount = Math.min(maxColumns, Math.ceil(childrenCount / 3));
     
     return columnCount;
 }
