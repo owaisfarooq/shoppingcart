@@ -5898,3 +5898,12 @@ Version:1.0
 .navbar-nav {
 	justify-content: center !important;
 }
+li.collapsed > ul { display: none }
+ul { cursor: pointer }
+li.collapsed, li.expanded, li.leaf {
+    position: relative;
+    list-style-type: none;
+    text-indent: -2em;
+}
+li.expanded:before { content: '−  ' }
+li.collapsed:before { content: '+  ' }

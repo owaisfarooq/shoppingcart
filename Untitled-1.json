@@ -1,0 +1,93 @@
+[
+    {
+        "ItemClassId": 5,
+        "ItemClassCode": null,
+        "ItemClassName": "CONFECTIONERY",
+        "ItemClassParentId": 1,
+        "ItemClassLevel": 2,
+        "data": 5,
+        "label": "CONFECTIONERY",
+        "ItemClassImages": [],
+        "children": [
+            {
+                "ItemClassId": 101,
+                "ItemClassCode": null,
+                "ItemClassName": "CHOCOLATE & CANDIES",
+                "ItemClassParentId": 5,
+                "ItemClassLevel": 3,
+                "data": 101,
+                "label": "CHOCOLATE & CANDIES",
+                "ItemClassImages": [],
+                "children": [
+                    {
+                        "ItemClassId": 502,
+                        "ItemClassCode": null,
+                        "ItemClassName": "JELLY",
+                        "ItemClassParentId": 101,
+                        "ItemClassLevel": 4,
+                        "data": 502,
+                        "label": "JELLY",
+                        "ItemClassImages": [],
+                        "children": []
+                    },
+                    {
+                        "ItemClassId": 503,
+                        "ItemClassCode": null,
+                        "ItemClassName": "CHOCOLATE",
+                        "ItemClassParentId": 101,
+                        "ItemClassLevel": 4,
+                        "data": 503,
+                        "label": "CHOCOLATE",
+                        "ItemClassImages": [],
+                        "children": []
+                    },
+                    {
+                        "ItemClassId": 504,
+                        "ItemClassCode": null,
+                        "ItemClassName": "MINT & GUM ",
+                        "ItemClassParentId": 101,
+                        "ItemClassLevel": 4,
+                        "data": 504,
+                        "label": "MINT & GUM ",
+                        "ItemClassImages": [],
+                        "children": []
+                    },
+                    {
+                        "ItemClassId": 501,
+                        "ItemClassCode": null,
+                        "ItemClassName": "CANDIES",
+                        "ItemClassParentId": 101,
+                        "ItemClassLevel": 4,
+                        "data": 501,
+                        "label": "CANDIES",
+                        "ItemClassImages": [],
+                        "children": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "ItemClassId": 9,
+        "ItemClassCode": null,
+        "ItemClassName": "TOBACCO",
+        "ItemClassParentId": 1,
+        "ItemClassLevel": 2,
+        "data": 9,
+        "label": "TOBACCO",
+        "ItemClassImages": [],
+        "children": [
+            {
+                "ItemClassId": 132,
+                "ItemClassCode": null,
+                "ItemClassName": "CIGARETTES",
+                "ItemClassParentId": 9,
+                "ItemClassLevel": 3,
+                "data": 132,
+                "label": "CIGARETTES",
+                "ItemClassImages": [],
+                "children": []
+            }
+        ]
+    }
+]

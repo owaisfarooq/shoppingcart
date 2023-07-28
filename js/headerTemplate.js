@@ -120,6 +120,7 @@ headerDiv.innerHTML = `
         </div>
     </div>
     <!-- Header Inner -->
+    
     <div class="header-inner">
         <div class="container">
             <div class="cat-nav-head">
@@ -160,31 +161,80 @@ headerDiv.innerHTML = `
             </div>
         </div>
     </div>
+
+
+
+
+
+
+
+    <div class="header-inner">
+        <div class="container">
+            <div class="cat-nav-head">
+                <div class="row" style="    justify-content: center;
+                /* display: block; */
+                margin-left: auto;
+                width: 100%;">
+                    <div class="col-lg-9 col-12" style="
+                    padding-left: 0px;
+                    padding-right: 0px;
+                ">
+                        <div class="menu-area">
+                            <!-- Main Menu -->
+                            <nav class="navbar navbar-expand-lg">
+                                <div class="navbar-collapse">	
+                                    <div class="nav-inner">	
+                                        <ul class="nav main-menu menu navbar-nav" id="header-menu">
+                                            <!--<li><a href="#">Shop<i class="ti-angle-down"></i></a>
+                                                <ul class="dropdown">
+                                                    <li><a href="shop-grid.html">Shop Grid</a></li>
+                                                    <li><a href="cart.html">Cart</a></li>
+                                                    <li><a href="checkout.html">Checkout</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Blog<i class="ti-angle-down"></i></a>
+                                                <ul class="dropdown">
+                                                    <li><a href="blog-single-sidebar.html">Blog Single Sidebar</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </nav>
+                            <!--/ End Main Menu -->	
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!--/ End Header Inner -->
 `
 getCategoryData()
 
 function getCategoryData() {
     apiCall("/api/ItemClass/getAllWithChildren", {
-        method: "POST",
-        headers: {
-            "Content-type": "application/json; charset=UTF-8"
-        }
-    },
-    (data) => {
-        CategoryData = data;
-        dataCategoriesDisplay();
-        populateCategories(data.result);
-        displayBanners(data)
-        return data;
-    });
+            method: "POST",
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        },
+        (data) => {
+            CategoryData = data;
+            dataCategoriesDisplay();
+            populateMenu(document.getElementById("header-menu"), data.result);
+            // logCategories(data.result)
+            populateCategories(data.result);
+            displayBanners(data)
+            return data;
+        });
 }
 
 function sortCategories() {
     CategoryData.result.sort((a, b) => {
         const A = a.children.length;
         const B = b.children.length;
-        return A < B ? 1 : A > B ? -1 :  0;
+        return A < B ? 1 : A > B ? -1 : 0;
     });
 }
 
@@ -213,7 +263,7 @@ function dataCategoriesDisplay() {
 function calculateColumnCount(childrenCount) {
     const maxColumns = 6;
     const columnCount = Math.min(maxColumns, Math.ceil(childrenCount / 3));
-    
+
     return columnCount;
 }
 
@@ -236,3 +286,50 @@ function makeCategoryDiv(category) {
     div += `</li>`
     return div;
 }
+
+
+function populateMenu(container, menu) {
+    if (!menu || !menu.length) return;
+
+    const ul = document.createElement("ul");
+    
+    for (const {ItemClassName, children} of menu) {
+    
+        const li = document.createElement("li");
+        li.textContent = ItemClassName;
+        li.className = "leaf";
+    
+        if (children.length !== 0) {
+            populateMenu(li, children);
+            li.className = "collapsed";       
+            li.addEventListener("click", (e) => { 
+                if (e.target !== e.currentTarget) return;
+                    e.target.classList.toggle("expanded");
+                e.target.classList.toggle("collapsed");
+            });
+        } else {
+            
+        }
+        ul.appendChild(li);
+    }
+    container.appendChild(ul);
+}
+
+// function logCategories(categories, indent = 0) {
+    // const headerMenu = document.getElementById("header-menu");
+//     categories.forEach((category) => {
+//         const {
+//             ItemClassName,
+//             ItemClassLevel,
+//             children
+//         } = category;
+//         if (ItemClassLevel == 2) {
+//             const list = document.createElement("li");
+//         }
+//         const spaces = " ".repeat(indent * 2);
+//         console.log(spaces + ItemClassName);
+//         if (children && children.length > 0) {
+//             logCategories(children, indent + 1);
+//         }
+//     });
+// }

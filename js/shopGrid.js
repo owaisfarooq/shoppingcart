@@ -26,17 +26,6 @@ function getDataFromCategory(id) {
 
 }
 
-function findCategoryFromId(categoryId, categories) {
-
-	for (let index = 0; index < categories.length; index++) {
-		if (categories.ItemClassId == categoryId) {
-			for (let index = 0; index < categories.length; index++) {
-		}
-	}
-	return false
-
-}
-
 async function populateCategories (categories) {
 	const categoryTab = document.getElementById("categoryTab");
 	
@@ -62,6 +51,7 @@ function displayResult(data) {
 		rowDiv.innerHTML += makeCategoryResultDiv(product);
 	});
 }
+
 function makeCategoryResultDiv(product) {
 	let img = "https://via.placeholder.com/550x750";
 
