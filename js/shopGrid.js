@@ -26,10 +26,23 @@ function getDataFromCategory(id) {
 
 }
 
+function findCategoryFromId(categoryId, categories) {
+
+	for (let index = 0; index < categories.length; index++) {
+		if (categories.ItemClassId == categoryId) {
+			for (let index = 0; index < categories.length; index++) {
+		}
+	}
+	return false
+
+}
+
 async function populateCategories (categories) {
 	const categoryTab = document.getElementById("categoryTab");
+	
 	categoryTab.innerHTML += `<ul class="categor-list">`;
 	// const  = await getCategoryData().result;
+	console.log(categories);
 	console.log(categories);
 	for (let index = 0; index < categories.length; index++) {
 		if (categoryId == categories[index].ItemClassId) {

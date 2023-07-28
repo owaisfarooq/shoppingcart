@@ -174,8 +174,8 @@ function getCategoryData() {
     (data) => {
         CategoryData = data;
         dataCategoriesDisplay();
-        displayBanners(data)
         populateCategories(data.result);
+        displayBanners(data)
         return data;
     });
 }
