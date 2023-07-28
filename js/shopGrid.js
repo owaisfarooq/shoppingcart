@@ -28,8 +28,10 @@ function getDataFromCategory(id) {
 
 async function populateCategories (categories) {
 	const categoryTab = document.getElementById("categoryTab");
+	
 	categoryTab.innerHTML += `<ul class="categor-list">`;
 	// const  = await getCategoryData().result;
+	console.log(categories);
 	console.log(categories);
 	for (let index = 0; index < categories.length; index++) {
 		if (categoryId == categories[index].ItemClassId) {
@@ -49,6 +51,7 @@ function displayResult(data) {
 		rowDiv.innerHTML += makeCategoryResultDiv(product);
 	});
 }
+
 function makeCategoryResultDiv(product) {
 	let img = "https://via.placeholder.com/550x750";
 
