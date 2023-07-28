@@ -119,6 +119,7 @@ async function loadScripts() {
     await loadFile ("js/communicationsWithServer/callApi.js")
     await loadFile ("js/popper.min.js")
     await loadFile ("js/bootstrap.min.js")
+    await loadFile ("js/footerTemplate.js")
     await loadFile ("js/alert.js")
     await loadFile ("js/communicationsWithServer/auth.js")
     await loadFile ("js/headerTemplate.js")
