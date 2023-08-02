@@ -53,24 +53,28 @@ headerDiv.innerHTML = `
                     <!--/ End Search Form -->
                     <div class="mobile-nav"></div>
                 </div>
-                <div class="col-lg-8 col-md-7 col-12">
+                <!--<div class="nav-inner header-menu" id="header-menu">-->
+                <div class="col-lg-2 col-md-7 col-12" style="margin-top:auto;margin-bottom:auto;">
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>All Category</option>
+                        <option value="1">watch</option>
+                        <option value="2">mobile</option>
+                        <option value="3">kid's item</option>
+                    </select>
+                </div>
+                <div class="col-lg-5 col-md-7 col-12">
                     <div class="search-bar-top">
-                        <div class="search-bar">
-                            <select style="display:none">
-                                <option selected="selected">All Category</option>
-                                <option>watch</option>
-                                <option>mobile</option>
-                                <option>kid’s item</option>
-                            </select>
-                            <form>
-                                <input name="search" id="searchParameters" onkeyup="searchStr()" placeholder="Search Products Here....." type="search" autocomplete="off">
-                                    <div class="search-results">
-                                        <div id="search-results-list" class="list-group">
-                                        </div>
+                        <div class="search-bar">                            
+                            <div class="input_container">
+                                <input name="search" class="awsome_input" id="searchParameters" onkeyup="searchStr()" placeholder="Search Products Here....." type="search" autocomplete="off">
+                                <span class="awsome_input_border"></span>
+                                <div class="search-results">
+                                    <div id="search-results-list" class="list-group">
                                     </div>
-                                <button class="btnn"><i class="ti-search"></i></button>
-                            </form>
+                                </div>
+                            </div>
                         </div>
+                        <button class="btnn"><i class="ti-search"></i></button>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-3 col-12">
@@ -107,7 +111,7 @@ headerDiv.innerHTML = `
                                 <div class="bottom">
                                     <div class="total">
                                         <span>Total</span>
-                                        <span class="total-amount" id="total">$134.00</span>
+                                        <span class="total-amount" id="total">00 Rs</span>
                                     </div>
                                     <a href="checkout.html" class="btn animate">Checkout</a>
                                 </div>
@@ -183,9 +187,9 @@ headerDiv.innerHTML = `
                             <!-- Main Menu -->
                             <nav class="navbar navbar-expand-lg">
                                 <div class="navbar-collapse">	
-                                    <div class="nav-inner">	
-                                        <ul class="nav main-menu menu navbar-nav" id="header-menu">
-                                            <!--<li><a href="#">Shop<i class="ti-angle-down"></i></a>
+                                    <div class="nav-inner header-menu" id="header-menu">
+<!--                                    <ul class="nav main-menu menu navbar-nav" >
+                                            <li><a href="#">Shop<i class="ti-angle-down"></i></a>
                                                 <ul class="dropdown">
                                                     <li><a href="shop-grid.html">Shop Grid</a></li>
                                                     <li><a href="cart.html">Cart</a></li>
@@ -197,7 +201,7 @@ headerDiv.innerHTML = `
                                                     <li><a href="blog-single-sidebar.html">Blog Single Sidebar</a></li>
                                                 </ul>
                                             </li>
-                                        </ul>
+                                        </ul>-->
                                     </div>
                                 </div>
                             </nav>
@@ -212,6 +216,16 @@ headerDiv.innerHTML = `
 `
 getCategoryData()
 
+const search = document.querySelector('[name="search"]');
+
+search.addEventListener('keyup', (e) => {
+    e.preventDefault()
+    if (e.code === 'Enter') {
+        console.log(search);
+        // window.location.href = url + "/shop-grid.html?search=";
+    }
+});
+
 function getCategoryData() {
     apiCall("/api/ItemClass/getAllWithChildren", {
             method: "POST",
@@ -220,12 +234,17 @@ function getCategoryData() {
             }
         },
         (data) => {
+
             CategoryData = data;
             dataCategoriesDisplay();
             populateMenu(document.getElementById("header-menu"), data.result);
-            // logCategories(data.result)
-            populateCategories(data.result);
-            displayBanners(data)
+
+            if (window.location.href.includes("shop-grid.html")) {
+                populateCategories(data.result);
+            }
+            if (findWordInString(window.location.href, "index")) {
+                displayBanners(data)
+            }
             return data;
         });
 }
@@ -292,23 +311,25 @@ function populateMenu(container, menu) {
     if (!menu || !menu.length) return;
 
     const ul = document.createElement("ul");
-    
-    for (const {ItemClassName, children} of menu) {
-    
+
+    for (const {
+            ItemClassName,
+            ItemClassLevel,
+            children
+        } of menu) {
+
         const li = document.createElement("li");
         li.textContent = ItemClassName;
         li.className = "leaf";
-    
+
         if (children.length !== 0) {
             populateMenu(li, children);
-            li.className = "collapsed";       
-            li.addEventListener("click", (e) => { 
+            li.className = "collapsed";
+            li.addEventListener("click", (e) => {
                 if (e.target !== e.currentTarget) return;
-                    e.target.classList.toggle("expanded");
+                e.target.classList.toggle("expanded");
                 e.target.classList.toggle("collapsed");
             });
-        } else {
-            
         }
         ul.appendChild(li);
     }
@@ -316,7 +337,7 @@ function populateMenu(container, menu) {
 }
 
 // function logCategories(categories, indent = 0) {
-    // const headerMenu = document.getElementById("header-menu");
+// const headerMenu = document.getElementById("header-menu");
 //     categories.forEach((category) => {
 //         const {
 //             ItemClassName,

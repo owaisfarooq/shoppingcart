@@ -1,10 +1,14 @@
 const urlParams = new URLSearchParams(window.location.search);
 const categoryId = urlParams.get('categoryId');
 let CategoryData;
-
+let currentStartOfPaginationData = 0
 getDataFromCategory(categoryId);
 
-function getDataFromCategory(id) {
+function getDataFromCategory(id, first = 0) {
+
+	const rowDiv = document.getElementById("dataDisplayRow");
+	rowDiv.innerHTML = "";
+	document.getElementById("shop-top").scrollIntoView({ behavior: 'smooth', block: 'center' });
 	apiCall("/api/Item/getAllLLCustomer", {
 		method: "POST",
 		headers: {
@@ -12,7 +16,7 @@ function getDataFromCategory(id) {
 		},
 		body: JSON.stringify({
 			"LazyLoadEvent": {
-				"first": 0,
+				"first": first,
 				"rows": 12
 			},
 			"Where": {
@@ -21,18 +25,21 @@ function getDataFromCategory(id) {
 		})
 	},
 	(data) => {
+		document.getElementById("paginationData").innerHTML = `
+			showing page: ${first/12+1} of ${Math.round(data.status.paginationData.totalRecords/12)}
+		`
+		currentStartOfPaginationData = first;
 		displayResult(data);
 	});
 
 }
 
-async function populateCategories (categories) {
+
+function populateCategories(categories) {
 	const categoryTab = document.getElementById("categoryTab");
 	
 	categoryTab.innerHTML += `<ul class="categor-list">`;
 	// const  = await getCategoryData().result;
-	console.log(categories);
-	console.log(categories);
 	for (let index = 0; index < categories.length; index++) {
 		if (categoryId == categories[index].ItemClassId) {
 			for (let jindex = 0; jindex < categories[index].children.length; jindex++) {
@@ -46,6 +53,7 @@ async function populateCategories (categories) {
 
 function displayResult(data) {
 	const rowDiv = document.getElementById("dataDisplayRow");
+
 	let products = data.result;
 	products.forEach(product => {
 		rowDiv.innerHTML += makeCategoryResultDiv(product);
@@ -55,7 +63,7 @@ function displayResult(data) {
 function makeCategoryResultDiv(product) {
 	let img = "https://via.placeholder.com/550x750";
 
-	if (product.ItemImages[0]){
+	if (product.ItemImages[0]) {
 		img = url + '/' + product.ItemImages[0].ItemImageFileName;
 	}
 	return `
@@ -84,5 +92,5 @@ function makeCategoryResultDiv(product) {
 				</div>
 			</div>
 		</div>
-	</div>`	
+	</div>`
 }

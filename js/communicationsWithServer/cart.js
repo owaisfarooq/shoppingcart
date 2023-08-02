@@ -42,6 +42,8 @@ async function updateCart() {
 
 async function getCustomerCart(callback) {
     const storedToken = localStorage.getItem("token");
+    
+    if (storedToken === null) return
 
     await apiCall("/api/cart/getCustomerCart", {
         method: "POST",

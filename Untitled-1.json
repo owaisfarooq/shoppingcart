@@ -44,14 +44,14 @@
                     {
                         "ItemClassId": 504,
                         "ItemClassCode": null,
-                        "ItemClassName": "MINT & GUM ",
+                        "ItemClassName": "MINT & GUM",
                         "ItemClassParentId": 101,
                         "ItemClassLevel": 4,
                         "data": 504,
-                        "label": "MINT & GUM ",
+                        "label": "MINT & GUM",
                         "ItemClassImages": [],
                         "children": []
-                    },
+                    },  
                     {
                         "ItemClassId": 501,
                         "ItemClassCode": null,

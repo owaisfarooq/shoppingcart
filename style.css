@@ -39,12 +39,14 @@ Version:1.0
 	--primary: #F7941D !important;
 	--secondary: #333 !important;
 }
+
 #notification-container {
 	position: fixed;
 	top: 20px;
 	right: 20px;
 	z-index: 9999;
 }
+
 .color-plate {
 	position: fixed;
 	display: block;
@@ -790,6 +792,8 @@ Version:1.0
 
 /* Header Middle */
 .header.shop .search-bar-top {
+	display: flex;
+	justify-content: center;
 	text-align: center;
 	margin-top: 10px;
 }
@@ -875,7 +879,7 @@ Version:1.0
 	width: 500px;
 }
 
-.header.shop .search-bar .btnn {
+.header.shop .btnn {
 	height: 50px;
 	line-height: 53px;
 	width: 62px;
@@ -883,7 +887,7 @@ Version:1.0
 	font-size: 18px;
 	color: #fff;
 	background: #333333;
-	position: absolute;
+	/* position: absolute; */
 	right: -2px;
 	top: -1px;
 	border: none;
@@ -893,7 +897,7 @@ Version:1.0
 	transition: all 0.4s ease;
 }
 
-.header.shop .search-bar .btnn:hover {
+.header.shop .btnn:hover {
 	color: #fff;
 	background: var(--primary);
 }
@@ -1166,7 +1170,7 @@ Version:1.0
 	position: relative;
 	-webkit-transition: all 0.2s ease;
 	-moz-transition: all 0.2s ease;
-	transition: all 0.2	s ease-in;
+	transition: all 0.2 s ease-in;
 }
 
 .header.shop .nav li:hover a {
@@ -2187,14 +2191,14 @@ Version:1.0
 }
 
 .float-up:hover {
-  /* This timing applies on the way OUT */
-  transition-timing-function: ease-in;
+	/* This timing applies on the way OUT */
+	transition-timing-function: ease-in;
 
-  /* Quick on the way out */
-  transition: 0.2s;
+	/* Quick on the way out */
+	transition: 0.2s;
 
-  /* Hide thing by pushing it outside by default */
-  transform: translateY(130%);
+	/* Hide thing by pushing it outside by default */
+	transform: translateY(130%);
 
 }
 
@@ -4308,7 +4312,17 @@ Version:1.0
 .pagination {
 	text-align: left;
 	margin: 50px 0 0 0;
-	display: block;
+	display: flex;
+}
+
+#paginationData {
+	padding: 10px;
+	padding-top: 5px;
+}
+
+.paginationNav {
+	display: flex;
+	flex-direction: row-reverse;
 }
 
 .pagination.center {
@@ -4332,6 +4346,10 @@ Version:1.0
 	border: 1px solid #e1e1e1;
 	font-size: 16px;
 	border-radius: 0px;
+}
+
+li.page-item.active {
+	background-color: var(--primary) !important;
 }
 
 .pagination .pagination-list li.active a,
@@ -5878,8 +5896,12 @@ Version:1.0
 	End Footer CSS
 ===============================*/
 .search-results {
-	width: 474px;
-	background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0px;
+    padding-top: 0px;
+    top: -17px;
+    position: relative;
 	text-align: left;
 }
 
@@ -5898,12 +5920,96 @@ Version:1.0
 .navbar-nav {
 	justify-content: center !important;
 }
-li.collapsed > ul { display: none }
-ul { cursor: pointer }
-li.collapsed, li.expanded, li.leaf {
-    position: relative;
-    list-style-type: none;
-    text-indent: -2em;
+
+.header-menu>ul {
+	display: flex;
+	justify-content: space-between;
+	color: white;
 }
-li.expanded:before { content: '−  ' }
-li.collapsed:before { content: '+  ' }
+
+.nav-inner .header-menu>.nav .main-menu .menu .navbar-nav {
+	background-color: #00cec9;
+}
+
+li.collapsed>ul {
+	display: none;
+	-webkit-transition: all 0.3s ease 0s;
+	-moz-transition: all 0.3s ease 0s;
+	transition: all 0.3s ease 0s;
+}
+
+ul {
+	cursor: pointer;
+	-webkit-transition: all 0.3s ease 0s;
+	-moz-transition: all 0.3s ease 0s;
+	transition: all 0.3s ease 0s;
+}
+
+li.collapsed,
+li.expanded,
+li.leaf {
+	position: relative;
+	list-style-type: none;
+	text-indent: -2em;
+	-webkit-transition: all 0.3s ease 0s;
+	-moz-transition: all 0.3s ease 0s;
+	transition: all 0.3s ease 0s;
+}
+
+li.expanded:before {
+	content: '−  ';
+	-webkit-transition: all 0.3s ease 0s;
+	-moz-transition: all 0.3s ease 0s;
+	transition: all 0.3s ease 0s;
+}
+
+li.collapsed:before {
+	content: '+  ';
+	-webkit-transition: all 0.3s ease 0s;
+	-moz-transition: all 0.3s ease 0s;
+	transition: all 0.3s ease 0s;
+}
+
+#paginationData {
+	cursor: default;
+}
+
+#searchParameters {
+	width: 100%;
+	transition: .3s width ease-in-out;
+}
+
+.input_container {
+	text-align: center;
+}
+
+.awsome_input {
+	padding: 5px 10px;
+	border: none;
+	background: transparent;
+	display: block;
+}
+
+.awsome_input_border {
+	display: inline-block;
+	width: 0px;
+	height: 2px;
+	background: var(--primary);
+	position: relative;
+	top: -13px;
+	-webkit-transition: all ease-in-out .15s;
+	-o-transition: all ease-in-out .15s;
+	transition: all ease-in-out .15s;
+}
+
+.awsome_input:hover,
+.awsome_input:active,
+.awsome_input:focus {
+	outline: none;
+}
+
+.awsome_input:hover+.awsome_input_border,
+.awsome_input:active+.awsome_input_border,
+.awsome_input:focus+.awsome_input_border {
+	width: 100%;
+}
