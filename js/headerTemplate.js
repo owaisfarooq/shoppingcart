@@ -1,5 +1,8 @@
+console.log("headerFile Loaded");
+let isShowing = false;
 const headerDiv = document.getElementById("header");
-headerDiv.innerHTML = `
+if (headerDiv) {
+    headerDiv.innerHTML = `
     <!-- Topbar -->
     <div class="topbar">
         <div class="container">
@@ -30,8 +33,8 @@ headerDiv.innerHTML = `
     </div>
     <!-- End Topbar -->
     <div class="middle-inner">
-        <div class="container">
-            <div class="row">
+        <div class="container" style="max-width: 100%;">
+            <div class="row" style="width: 100%;justify-content: space-around;">
                 <div class="col-lg-2 col-md-2 col-12">
                     <!-- Logo -->
                     <div class="logo">
@@ -54,14 +57,7 @@ headerDiv.innerHTML = `
                     <div class="mobile-nav"></div>
                 </div>
                 <!--<div class="nav-inner header-menu" id="header-menu">-->
-                <div class="col-lg-2 col-md-7 col-12" style="margin-top:auto;margin-bottom:auto;">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>All Category</option>
-                        <option value="1">watch</option>
-                        <option value="2">mobile</option>
-                        <option value="3">kid's item</option>
-                    </select>
-                </div>
+                
                 <div class="col-lg-5 col-md-7 col-12">
                     <div class="search-bar-top">
                         <div class="search-bar">                            
@@ -120,22 +116,32 @@ headerDiv.innerHTML = `
                         </div>
                     </div>
                 </div>
+                <div style="margin-top: auto;margin-bottom: auto;width: min-content;">
+                    <div id="menuIcon" onclick="toggleCategories()">
+                        <div class="bar1"></div>
+                        <div class="bar2"></div>
+                        <div class="bar3"></div>
+                    </div>
+                </div>
+                <!--
+                    <div class="col-lg-2 col-md-7 col-12" id="allCategoriesMenu" style="margin-top: auto; width: min-content;margin-bottom: auto;height: 0px;overflow: hidden;"></div>
+                        <div class="nav-inner header-menu" id="header-menu">
+                        </div>    
+                        <select class="form-select" id="allCategoriesSelect" aria-label="Default select example">
+                            <option selected>All Categories</option>
+                        </select>
+                    </div>
+                -->
             </div>
         </div>
     </div>
     <!-- Header Inner -->
     
     <div class="header-inner">
-        <div class="container">
+        <div class="container" style="width: 100%;max-width: 100%;">
             <div class="cat-nav-head">
-                <div class="row" style="    justify-content: center;
-                /* display: block; */
-                margin-left: auto;
-                width: 100%;">
-                    <div class="col-lg-9 col-12" style="
-                    padding-left: 0px;
-                    padding-right: 0px;
-                ">
+                <div class="row" style="justify-content: center;/* display: block; */margin-left: auto;width: 100%;max-width: 100%;">
+                    <div class="col-lg-9 col-12" style="padding-left: 0px;padding-right: 0px;">
                         <div class="menu-area">
                             <!-- Main Menu -->
                             <nav class="navbar navbar-expand-lg">
@@ -172,7 +178,7 @@ headerDiv.innerHTML = `
 
 
 
-    <div class="header-inner">
+    <div class="header-inner asd">
         <div class="container">
             <div class="cat-nav-head">
                 <div class="row" style="    justify-content: center;
@@ -187,8 +193,8 @@ headerDiv.innerHTML = `
                             <!-- Main Menu -->
                             <nav class="navbar navbar-expand-lg">
                                 <div class="navbar-collapse">	
-                                    <div class="nav-inner header-menu" id="header-menu">
-<!--                                    <ul class="nav main-menu menu navbar-nav" >
+                                <!--<div class="nav-inner header-menu" id="header-menu">
+                                    <ul class="nav main-menu menu navbar-nav" >
                                             <li><a href="#">Shop<i class="ti-angle-down"></i></a>
                                                 <ul class="dropdown">
                                                     <li><a href="shop-grid.html">Shop Grid</a></li>
@@ -201,8 +207,8 @@ headerDiv.innerHTML = `
                                                     <li><a href="blog-single-sidebar.html">Blog Single Sidebar</a></li>
                                                 </ul>
                                             </li>
-                                        </ul>-->
-                                    </div>
+                                        </ul>
+                                    </div>-->
                                 </div>
                             </nav>
                             <!--/ End Main Menu -->	
@@ -214,6 +220,8 @@ headerDiv.innerHTML = `
     </div>
     <!--/ End Header Inner -->
 `
+}
+
 getCategoryData()
 
 const search = document.querySelector('[name="search"]');
@@ -226,45 +234,47 @@ search.addEventListener('keyup', (e) => {
     }
 });
 
-function getCategoryData() {
+async function getCategoryData() {
     apiCall("/api/ItemClass/getAllWithChildren", {
-            method: "POST",
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
-            }
-        },
-        (data) => {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    },
+    ( categoryData ) => {
+        dataCategoriesDisplay(categoryData);
+        if (categoryData){
+            populateMenu(document.getElementById("header-menu"), categoryData.result);
+            populateMenu(document.getElementById("allCategoriesSelect"), categoryData.result);    
+        }
 
-            CategoryData = data;
-            dataCategoriesDisplay();
-            populateMenu(document.getElementById("header-menu"), data.result);
+        // populateAllCategoriesSelect(data);
 
-            if (window.location.href.includes("shop-grid.html")) {
-                populateCategories(data.result);
-            }
-            if (findWordInString(window.location.href, "index")) {
-                displayBanners(data)
-            }
-            return data;
-        });
+        if (window.location.href.includes("shop-grid.html")) {
+            populateCategories(categoryData.result);
+        }
+        if (findWordInString(window.location.href, "index")) {
+            displayBanners(categoryData)
+        }
+
+        return categoryData;
+    });
 }
 
-function sortCategories() {
-    CategoryData.result.sort((a, b) => {
+function sortCategories(categoryData) {
+    return categoryData.result.sort((a, b) => {
         const A = a.children.length;
         const B = b.children.length;
         return A < B ? 1 : A > B ? -1 : 0;
     });
 }
 
-function dataCategoriesDisplay() {
-
-    sortCategories()
+function dataCategoriesDisplay( categoryData = sortCategories(categoryData) ) {
 
     const categoriesDiv = document.getElementById("categories");
 
-    for (let index = 0; index < CategoryData.result.length; index++) {
-        const category = CategoryData.result[index];
+    for (let index = 0; index < categoryData.result.length; index++) {
+        const category = categoryData.result[index];
         categoriesDiv.innerHTML += makeCategoryDiv(category);
     }
 
@@ -286,6 +296,10 @@ function calculateColumnCount(childrenCount) {
     return columnCount;
 }
 
+function populateAllCategoriesSelect (data) {
+    let result = data.result;
+    
+}
 
 function makeCategoryDiv(category) {
     let div = `
@@ -354,3 +368,14 @@ function populateMenu(container, menu) {
 //         }
 //     });
 // }
+
+
+function toggleCategories () {
+    
+    isShowing = isShowing ? false : true;
+    const menuIcon = document.getElementById("menuIcon");
+    const allCategoriesMenu = document.getElementById("allCategoriesMenu");
+    menuIcon.classList.toggle("change");
+    allCategoriesMenu.classList.toggle("fitContentHeight")
+    
+}

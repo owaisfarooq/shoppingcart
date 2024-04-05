@@ -1,5 +1,9 @@
 const urlParams = new URLSearchParams(window.location.search);
 const oldUrl = urlParams.get('oldUrl') !== undefined ? urlParams.get('oldUrl') : "index.html";
+document.addEventListener('DOMContentLoaded', () => {
+    const preloader = document.getElementsByClassName('preloader');
+    console.log(preloader);
+});
 
 async function registerNewUser() {
     const firstName = document.getElementById("first_name");

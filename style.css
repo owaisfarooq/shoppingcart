@@ -40,6 +40,12 @@ Version:1.0
 	--secondary: #333 !important;
 }
 
+body {
+	overflow-x: hidden;
+}
+body::-webkit-scrollbar {
+	display: none;
+}
 #notification-container {
 	position: fixed;
 	top: 20px;
@@ -4479,7 +4485,7 @@ li.page-item.active {
    Start Shop Services CSS
 ========================================*/
 .shop-services.section {
-	padding: 80px 0 0px 0;
+	padding: 80px 0 80px 0;
 	background: #fff;
 }
 
@@ -5923,8 +5929,9 @@ li.page-item.active {
 
 .header-menu>ul {
 	display: flex;
+    flex-direction: column;
 	justify-content: space-between;
-	color: white;
+	/* color: white; */
 }
 
 .nav-inner .header-menu>.nav .main-menu .menu .navbar-nav {
@@ -5950,7 +5957,7 @@ li.expanded,
 li.leaf {
 	position: relative;
 	list-style-type: none;
-	text-indent: -2em;
+	/* text-indent: -2em; */
 	-webkit-transition: all 0.3s ease 0s;
 	-moz-transition: all 0.3s ease 0s;
 	transition: all 0.3s ease 0s;
@@ -6012,4 +6019,32 @@ li.collapsed:before {
 .awsome_input:active+.awsome_input_border,
 .awsome_input:focus+.awsome_input_border {
 	width: 100%;
+}
+#menuIcon:hover {
+	cursor: pointer;
+}
+.bar1, .bar2, .bar3 {
+	width: 35px;
+	height: 5px;
+	background-color: var(--secondary);
+	margin: 6px 0;
+	transition: 0.4s;
+}
+
+.change .bar1 {
+	transform: translate(0, 11px) rotate(-45deg);
+}
+
+.change .bar2 {
+	opacity: 0;
+}
+
+.change .bar3 {
+	transform: translate(0, -11px) rotate(45deg);
+}
+.middle-inner>.container>div {
+	width: fit-content;
+}
+.fitContentHeight {
+	height: fit-content !important;
 }

@@ -58,9 +58,10 @@ function displayTopSellingProducts(products) {
 
 function makeItemsDiv(product) {
     let img = product.ItemImages[0] ? url + product.ItemImages[0].ItemImageFileName : "https://via.placeholder.com/550x750";
+    let name = product.ItemName.substring(0, 20) + "...";
 
     return `
-        <div class="col-xl-2 col-lg-4 col-md-4 col-12">
+        <div class="col-xl-2 col-lg-4 col-md-4 col-4">
             <div class="single-product">
                 <div class="product-img">
                     <a href="product.html?id=${product.ItemId}">
@@ -79,7 +80,7 @@ function makeItemsDiv(product) {
                     </div>
                 </div>
                 <div class="product-content">
-                    <h3><a href="product.html?id=${product.ItemId}">${product.ItemName}</a></h3>
+                    <h3><a href="product.html?id=${product.ItemId}">${name}</a></h3>
                     <div class="product-price">
                         <span>${product.ItemNetSalePrice}</span>
                     </div>

@@ -126,7 +126,7 @@ async function loadScripts() {
     await loadFile ("js/footerTemplate.js")
     await loadFileScript()
     //await loadFile ("js/colors.js")
-    await loadFile ("js/nicesellect.js")
+    // await loadFile ("js/nicesellect.js")
     await loadFile ("js/slicknav.min.js")
     await loadFile ("js/owl-carousel.js")
     await loadFile ("js/magnific-popup.js")
@@ -136,12 +136,13 @@ async function loadScripts() {
     await loadFile ("js/scrollup.js")
     await loadFile ("js/onepage-nav.min.js")
     await loadFile ("js/easing.js")
-    await loadFile ("js/active.js")
+    // await loadFile ("js/active.js")
     // await loadFile ("js/shopGrid.js")
     await loadFile ("js/communicationsWithServer/cart.js")
     // await loadFile ("js/communicationsWithServer/onload.js")
     await loadFile ("js/communicationsWithServer/search.js")
     await loadFile ("js/changePage.js")
+    document.getElementById("preloader").remove();
   } catch (error) {
     console.error("Error loading scripts:", error);
   }
